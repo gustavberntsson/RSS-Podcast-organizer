@@ -22,9 +22,9 @@ namespace PoddApp
         {
             string rssLank = txtNyttFlodeURL.Text;
 
-            poddController.HamtaPoddarFranRss(rssLank);
+            poddController.HamtaAvsnittFranRss(rssLank);
 
-            txtVisaAvsnitt.DataSource = poddController.HamtaAllaPoddar();
+            txtVisaAvsnitt.DataSource = poddController.HamtaAllaAvsnitt();
 
             txtVisaAvsnitt.DisplayMember = "Rubrik";
         }
