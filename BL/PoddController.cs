@@ -27,14 +27,14 @@ public class PoddController
 
         foreach (SyndicationItem item in poddFlode.Items)
         {
-            Podcast enPodd = new Podcast
+            Podcast enPodd = new Podcast()
             {
                 Id = item.Id.ToString(),
                 Rubrik = item.Title.Text,
-                Publiceringsdatum = item.Publishdate
+                Publiceringsdatum = item.PublishDate
             };
 
-            poddRepository.LaggTillPodd(enPodd);
+            poddRepository.LaggTillPoddar(enPodd);
 
         }
     }
