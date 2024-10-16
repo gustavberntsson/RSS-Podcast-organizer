@@ -8,6 +8,7 @@ namespace Models
 {
     public class Podcast
     {
+        public string? PodcastTitel { get; set; }
         public string? Id { get; set; }
         public string? Rubrik { get; set; }
         public DateTimeOffset Publiceringsdatum { get; set; }
@@ -19,8 +20,9 @@ namespace Models
 
         }
 
-        public Podcast(string id, string rubrik, DateTimeOffset publiceringsdatum)
+        public Podcast(string podcastTitel, string id, string rubrik, DateTimeOffset publiceringsdatum)
         {
+            PodcastTitel = "Mitt flöde 1";
             Id = id;
             Rubrik = rubrik;
             Publiceringsdatum = publiceringsdatum;
