@@ -41,5 +41,30 @@ namespace PoddApp
         {
 
         }
+
+        private void btnLaggTillKategori_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNyttFlodeURL_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMinaFloden_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAvsnittBeskrivning_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
