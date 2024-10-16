@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             lblHeader = new Label();
-            button1 = new Button();
+            btnNyttFlodeLaggTill = new Button();
             txtNyttFlodeURL = new TextBox();
             richTextBox1 = new RichTextBox();
             txtVisaKategorier = new RichTextBox();
@@ -39,7 +39,7 @@
             lblSkapaNyttFlodeKategori = new Label();
             lblSkapaNyttFlode = new Label();
             lblMinaFloden = new Label();
-            richTextBox3 = new RichTextBox();
+            txtMinaFloden = new RichTextBox();
             cbMinaFloden = new ComboBox();
             btnVisaFloden = new Button();
             btnRedigeraFloden = new Button();
@@ -62,17 +62,17 @@
             lblHeader.Text = "Podcasts";
             lblHeader.Click += label1_Click;
             // 
-            // button1
+            // btnNyttFlodeLaggTill
             // 
-            button1.BackColor = SystemColors.GradientActiveCaption;
-            button1.Location = new Point(363, 240);
-            button1.Margin = new Padding(2, 3, 2, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(89, 28);
-            button1.TabIndex = 1;
-            button1.Text = "Lägg till";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnNyttFlodeLaggTill.BackColor = SystemColors.GradientActiveCaption;
+            btnNyttFlodeLaggTill.Location = new Point(363, 240);
+            btnNyttFlodeLaggTill.Margin = new Padding(2, 3, 2, 3);
+            btnNyttFlodeLaggTill.Name = "btnNyttFlodeLaggTill";
+            btnNyttFlodeLaggTill.Size = new Size(89, 28);
+            btnNyttFlodeLaggTill.TabIndex = 1;
+            btnNyttFlodeLaggTill.Text = "Lägg till";
+            btnNyttFlodeLaggTill.UseVisualStyleBackColor = false;
+            btnNyttFlodeLaggTill.Click += button1_Click;
             // 
             // txtNyttFlodeURL
             // 
@@ -145,26 +145,26 @@
             // lblMinaFloden
             // 
             lblMinaFloden.AutoSize = true;
-            lblMinaFloden.Location = new Point(643, 205);
+            lblMinaFloden.Location = new Point(633, 205);
             lblMinaFloden.Name = "lblMinaFloden";
             lblMinaFloden.Size = new Size(89, 20);
             lblMinaFloden.TabIndex = 13;
             lblMinaFloden.Text = "Mina flöden";
             // 
-            // richTextBox3
+            // txtMinaFloden
             // 
-            richTextBox3.Location = new Point(484, 284);
-            richTextBox3.Name = "richTextBox3";
-            richTextBox3.Size = new Size(382, 442);
-            richTextBox3.TabIndex = 14;
-            richTextBox3.Text = "";
+            txtMinaFloden.Location = new Point(484, 284);
+            txtMinaFloden.Name = "txtMinaFloden";
+            txtMinaFloden.Size = new Size(382, 442);
+            txtMinaFloden.TabIndex = 14;
+            txtMinaFloden.Text = "";
             // 
             // cbMinaFloden
             // 
             cbMinaFloden.FormattingEnabled = true;
-            cbMinaFloden.Location = new Point(551, 242);
+            cbMinaFloden.Location = new Point(484, 242);
             cbMinaFloden.Name = "cbMinaFloden";
-            cbMinaFloden.Size = new Size(212, 28);
+            cbMinaFloden.Size = new Size(279, 28);
             cbMinaFloden.TabIndex = 15;
             // 
             // btnVisaFloden
@@ -272,7 +272,7 @@
             Controls.Add(btnRedigeraFloden);
             Controls.Add(btnVisaFloden);
             Controls.Add(cbMinaFloden);
-            Controls.Add(richTextBox3);
+            Controls.Add(txtMinaFloden);
             Controls.Add(lblMinaFloden);
             Controls.Add(lblSkapaNyttFlode);
             Controls.Add(lblSkapaNyttFlodeKategori);
@@ -282,7 +282,7 @@
             Controls.Add(txtVisaKategorier);
             Controls.Add(richTextBox1);
             Controls.Add(txtNyttFlodeURL);
-            Controls.Add(button1);
+            Controls.Add(btnNyttFlodeLaggTill);
             Controls.Add(lblHeader);
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
@@ -294,7 +294,7 @@
         #endregion
 
         private Label lblHeader;
-        private Button button1;
+        private Button btnNyttFlodeLaggTill;
         private TextBox txtNyttFlodeURL;
         private RichTextBox richTextBox1;
         private RichTextBox txtVisaKategorier;
@@ -304,7 +304,7 @@
         private Label lblSkapaNyttFlodeKategori;
         private Label lblSkapaNyttFlode;
         private Label lblMinaFloden;
-        private RichTextBox richTextBox3;
+        private RichTextBox txtMinaFloden;
         private ComboBox cbMinaFloden;
         private Button btnVisaFloden;
         private Button btnRedigeraFloden;
