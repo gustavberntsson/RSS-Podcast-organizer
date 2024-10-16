@@ -8,5 +8,6 @@ namespace Models
 {
     internal interface IKategori
     {
+        string KategoriNamn { get; set; }
     }
 }

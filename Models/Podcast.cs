@@ -12,6 +12,8 @@ namespace Models
         public string? Rubrik { get; set; }
         public DateTimeOffset Publiceringsdatum { get; set; }
 
+        public string? Langd { get; set; }
+
         public Podcast()
         {
 

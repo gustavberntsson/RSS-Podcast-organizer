@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    internal class Avsnitt
+    internal class Avsnitt : Podcast
     {
+        
     }
 }
