@@ -6,35 +6,35 @@ using DL;
 namespace BL;
 public class PoddController
 {
-    private PoddRepository poddRepository;
+    private AvsnittRepository avsnittRepository;
 
     public PoddController()
     {
-        poddRepository = new PoddRepository();
+        avsnittRepository = new AvsnittRepository();
     }
 
-    public List<Podcast> HamtaAllaPoddar()
+    public List<Avsnitt> HamtaAllaAvsnitt()
     {
-        return poddRepository.HamtaAllaPoddar();
+        return avsnittRepository.HamtaAllaAvsnitt();
     }
 
 
-    public void HamtaPoddarFranRss(string rssLank)
+    public void HamtaAvsnittFranRss(string rssLank)
     {
 
         XmlReader minXMLlasare = XmlReader.Create(rssLank);
-        SyndicationFeed poddFlode = SyndicationFeed.Load(minXMLlasare);
+        SyndicationFeed avsnittFlode = SyndicationFeed.Load(minXMLlasare);
 
-        foreach (SyndicationItem item in poddFlode.Items)
+        foreach (SyndicationItem item in avsnittFlode.Items)
         {
-            Podcast enPodd = new Podcast()
+            Avsnitt ettAvsnitt = new Avsnitt()
             {
                 Id = item.Id.ToString(),
                 Rubrik = item.Title.Text,
                 Publiceringsdatum = item.PublishDate
             };
 
-            poddRepository.LaggTillPoddar(enPodd);
+            avsnittRepository.LaggTillAvsnitt(ettAvsnitt);
 
         }
     }
