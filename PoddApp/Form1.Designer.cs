@@ -94,6 +94,7 @@
             // cbNyttFlodeKategori
             // 
             cbNyttFlodeKategori.FormattingEnabled = true;
+            cbNyttFlodeKategori.Items.AddRange(new object[] { "Skräck", "Komedi" });
             cbNyttFlodeKategori.Location = new Point(128, 180);
             cbNyttFlodeKategori.Margin = new Padding(3, 2, 3, 2);
             cbNyttFlodeKategori.Name = "cbNyttFlodeKategori";
