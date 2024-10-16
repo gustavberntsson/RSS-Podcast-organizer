@@ -31,13 +31,11 @@
             lblHeader = new Label();
             btnNyttFlodeLaggTill = new Button();
             txtNyttFlodeURL = new TextBox();
-            richTextBox1 = new RichTextBox();
             txtVisaKategorier = new RichTextBox();
             cbNyttFlodeKategori = new ComboBox();
             lblSkapaNyttFlodeKategori = new Label();
             lblSkapaNyttFlode = new Label();
             lblAvsnittLista = new Label();
-            txtAvsnittLista = new RichTextBox();
             btnRedigeraFloden = new Button();
             btnRaderaFloden = new Button();
             lblMinaKategorier = new Label();
@@ -49,6 +47,8 @@
             lblLaggTillFlodeURL = new Label();
             lblAvsnittBeskrivning = new Label();
             txtAvsnittBeskrivning = new RichTextBox();
+            txtVisaFloden = new ListBox();
+            txtVisaAvsnitt = new ListBox();
             SuspendLayout();
             // 
             // lblHeader
@@ -82,14 +82,6 @@
             txtNyttFlodeURL.Size = new Size(212, 27);
             txtNyttFlodeURL.TabIndex = 3;
             txtNyttFlodeURL.TextChanged += txtNyttFlodeURL_TextChanged;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(56, 284);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(396, 452);
-            richTextBox1.TabIndex = 5;
-            richTextBox1.Text = "";
             // 
             // txtVisaKategorier
             // 
@@ -135,14 +127,6 @@
             lblAvsnittLista.TabIndex = 13;
             lblAvsnittLista.Text = "Avsnitt";
             lblAvsnittLista.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // txtAvsnittLista
-            // 
-            txtAvsnittLista.Location = new Point(505, 284);
-            txtAvsnittLista.Name = "txtAvsnittLista";
-            txtAvsnittLista.Size = new Size(361, 249);
-            txtAvsnittLista.TabIndex = 14;
-            txtAvsnittLista.Text = "";
             // 
             // btnRedigeraFloden
             // 
@@ -253,11 +237,29 @@
             txtAvsnittBeskrivning.TabIndex = 27;
             txtAvsnittBeskrivning.Text = "";
             // 
+            // txtVisaFloden
+            // 
+            txtVisaFloden.FormattingEnabled = true;
+            txtVisaFloden.Location = new Point(105, 297);
+            txtVisaFloden.Name = "txtVisaFloden";
+            txtVisaFloden.Size = new Size(293, 324);
+            txtVisaFloden.TabIndex = 28;
+            // 
+            // txtVisaAvsnitt
+            // 
+            txtVisaAvsnitt.FormattingEnabled = true;
+            txtVisaAvsnitt.Location = new Point(505, 294);
+            txtVisaAvsnitt.Name = "txtVisaAvsnitt";
+            txtVisaAvsnitt.Size = new Size(361, 244);
+            txtVisaAvsnitt.TabIndex = 29;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1337, 782);
+            Controls.Add(txtVisaAvsnitt);
+            Controls.Add(txtVisaFloden);
             Controls.Add(txtAvsnittBeskrivning);
             Controls.Add(lblAvsnittBeskrivning);
             Controls.Add(lblLaggTillFlodeURL);
@@ -269,13 +271,11 @@
             Controls.Add(lblMinaKategorier);
             Controls.Add(btnRaderaFloden);
             Controls.Add(btnRedigeraFloden);
-            Controls.Add(txtAvsnittLista);
             Controls.Add(lblAvsnittLista);
             Controls.Add(lblSkapaNyttFlode);
             Controls.Add(lblSkapaNyttFlodeKategori);
             Controls.Add(cbNyttFlodeKategori);
             Controls.Add(txtVisaKategorier);
-            Controls.Add(richTextBox1);
             Controls.Add(txtNyttFlodeURL);
             Controls.Add(btnNyttFlodeLaggTill);
             Controls.Add(lblHeader);
@@ -291,13 +291,11 @@
         private Label lblHeader;
         private Button btnNyttFlodeLaggTill;
         private TextBox txtNyttFlodeURL;
-        private RichTextBox richTextBox1;
         private RichTextBox txtVisaKategorier;
         private ComboBox cbNyttFlodeKategori;
         private Label lblSkapaNyttFlodeKategori;
         private Label lblSkapaNyttFlode;
         private Label lblAvsnittLista;
-        private RichTextBox txtAvsnittLista;
         private Button btnRedigeraFloden;
         private Button btnRaderaFloden;
         private Label lblMinaKategorier;
@@ -309,5 +307,7 @@
         private Label lblLaggTillFlodeURL;
         private Label lblAvsnittBeskrivning;
         private RichTextBox txtAvsnittBeskrivning;
+        private ListBox txtVisaFloden;
+        private ListBox txtVisaAvsnitt;
     }
 }

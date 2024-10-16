@@ -15,7 +15,12 @@ namespace DL
             {
                 return poddLista;
             }
-            }
+
+        public List<Podcast> HamtaAllaAvsnitt()
+        {
+            throw new NotImplementedException();
+        }
+    }
             //Den här klassen ska ha metoder för att hämta och sätta värden, samt skapa våran lista
         }
 
