@@ -7,22 +7,31 @@ using System.Threading.Channels;
 namespace BL;
 public class PoddController
 {
-    private AvsnittRepository avsnittRepository;
+    private List<AvsnittRepository> allaPoddar;
 
     public PoddController()
     {
-        avsnittRepository = new AvsnittRepository();
+        allaPoddar = new List<AvsnittRepository>();
+        
     }
 
-    public List<Avsnitt> HamtaAllaAvsnitt()
+    //Tar in en lista som parameter för att sedan kunna returnera DEN listans avsnitt, kanske onödig
+    public List<Avsnitt> HamtaAllaAvsnitt(AvsnittRepository avsnittRepository)
     {
         return avsnittRepository.HamtaAllaAvsnitt();
     }
 
-
-    public void HamtaAvsnittFranRss(string rssLank)
+    public List<AvsnittRepository> HamtaAllaPoddar()
     {
+        return allaPoddar;
+    }
 
+
+    public void HamtaAvsnittFranRss(string rssLank, string valdKategori)
+    {
+        var avsnittRepository = new AvsnittRepository();
+        //Döper avsnittsrepositoriet till samma som rsslänken, används för att identifiera listan
+        avsnittRepository.SetNamn(rssLank);
         XmlReader minXMLlasare = XmlReader.Create(rssLank);
         SyndicationFeed avsnittFlode = SyndicationFeed.Load(minXMLlasare);
 
@@ -38,6 +47,7 @@ public class PoddController
             avsnittRepository.LaggTillAvsnitt(ettAvsnitt);
 
         }
+        allaPoddar.Add(avsnittRepository);
     }
 }
 	
