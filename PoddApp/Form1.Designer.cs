@@ -54,9 +54,9 @@
             // lblHeader
             // 
             lblHeader.AutoSize = true;
-            lblHeader.Location = new Point(586, 41);
+            lblHeader.Location = new Point(513, 31);
             lblHeader.Name = "lblHeader";
-            lblHeader.Size = new Size(66, 20);
+            lblHeader.Size = new Size(54, 15);
             lblHeader.TabIndex = 0;
             lblHeader.Text = "Podcasts";
             lblHeader.Click += label1_Click;
@@ -64,10 +64,10 @@
             // btnNyttFlodeLaggTill
             // 
             btnNyttFlodeLaggTill.BackColor = SystemColors.GradientActiveCaption;
-            btnNyttFlodeLaggTill.Location = new Point(363, 240);
-            btnNyttFlodeLaggTill.Margin = new Padding(2, 3, 2, 3);
+            btnNyttFlodeLaggTill.Location = new Point(318, 180);
+            btnNyttFlodeLaggTill.Margin = new Padding(2);
             btnNyttFlodeLaggTill.Name = "btnNyttFlodeLaggTill";
-            btnNyttFlodeLaggTill.Size = new Size(89, 28);
+            btnNyttFlodeLaggTill.Size = new Size(78, 21);
             btnNyttFlodeLaggTill.TabIndex = 1;
             btnNyttFlodeLaggTill.Text = "Lägg till";
             btnNyttFlodeLaggTill.UseVisualStyleBackColor = false;
@@ -75,45 +75,46 @@
             // 
             // txtNyttFlodeURL
             // 
-            txtNyttFlodeURL.Location = new Point(146, 206);
-            txtNyttFlodeURL.Margin = new Padding(3, 4, 3, 4);
+            txtNyttFlodeURL.Location = new Point(128, 154);
             txtNyttFlodeURL.Name = "txtNyttFlodeURL";
             txtNyttFlodeURL.PlaceholderText = "https://www.exempel.com/rss";
-            txtNyttFlodeURL.Size = new Size(212, 27);
+            txtNyttFlodeURL.Size = new Size(186, 23);
             txtNyttFlodeURL.TabIndex = 3;
             txtNyttFlodeURL.TextChanged += txtNyttFlodeURL_TextChanged;
             // 
             // txtVisaKategorier
             // 
-            txtVisaKategorier.Location = new Point(1012, 284);
+            txtVisaKategorier.Location = new Point(886, 213);
+            txtVisaKategorier.Margin = new Padding(3, 2, 3, 2);
             txtVisaKategorier.Name = "txtVisaKategorier";
-            txtVisaKategorier.Size = new Size(313, 157);
+            txtVisaKategorier.Size = new Size(274, 119);
             txtVisaKategorier.TabIndex = 6;
             txtVisaKategorier.Text = "";
             // 
             // cbNyttFlodeKategori
             // 
             cbNyttFlodeKategori.FormattingEnabled = true;
-            cbNyttFlodeKategori.Location = new Point(146, 240);
+            cbNyttFlodeKategori.Location = new Point(128, 180);
+            cbNyttFlodeKategori.Margin = new Padding(3, 2, 3, 2);
             cbNyttFlodeKategori.Name = "cbNyttFlodeKategori";
-            cbNyttFlodeKategori.Size = new Size(212, 28);
+            cbNyttFlodeKategori.Size = new Size(186, 23);
             cbNyttFlodeKategori.TabIndex = 8;
             // 
             // lblSkapaNyttFlodeKategori
             // 
             lblSkapaNyttFlodeKategori.AutoSize = true;
-            lblSkapaNyttFlodeKategori.Location = new Point(74, 244);
+            lblSkapaNyttFlodeKategori.Location = new Point(65, 183);
             lblSkapaNyttFlodeKategori.Name = "lblSkapaNyttFlodeKategori";
-            lblSkapaNyttFlodeKategori.Size = new Size(66, 20);
+            lblSkapaNyttFlodeKategori.Size = new Size(51, 15);
             lblSkapaNyttFlodeKategori.TabIndex = 11;
             lblSkapaNyttFlodeKategori.Text = "Kategori";
             // 
             // lblSkapaNyttFlode
             // 
             lblSkapaNyttFlode.AutoSize = true;
-            lblSkapaNyttFlode.Location = new Point(182, 164);
+            lblSkapaNyttFlode.Location = new Point(159, 123);
             lblSkapaNyttFlode.Name = "lblSkapaNyttFlode";
-            lblSkapaNyttFlode.Size = new Size(117, 20);
+            lblSkapaNyttFlode.Size = new Size(92, 15);
             lblSkapaNyttFlode.TabIndex = 12;
             lblSkapaNyttFlode.Text = "Skapa nytt flöde";
             lblSkapaNyttFlode.Click += label4_Click;
@@ -121,9 +122,9 @@
             // lblAvsnittLista
             // 
             lblAvsnittLista.AutoSize = true;
-            lblAvsnittLista.Location = new Point(627, 240);
+            lblAvsnittLista.Location = new Point(549, 180);
             lblAvsnittLista.Name = "lblAvsnittLista";
-            lblAvsnittLista.Size = new Size(54, 20);
+            lblAvsnittLista.Size = new Size(44, 15);
             lblAvsnittLista.TabIndex = 13;
             lblAvsnittLista.Text = "Avsnitt";
             lblAvsnittLista.TextAlign = ContentAlignment.MiddleCenter;
@@ -131,10 +132,10 @@
             // btnRedigeraFloden
             // 
             btnRedigeraFloden.BackColor = SystemColors.GradientActiveCaption;
-            btnRedigeraFloden.Location = new Point(56, 742);
-            btnRedigeraFloden.Margin = new Padding(2, 3, 2, 3);
+            btnRedigeraFloden.Location = new Point(49, 556);
+            btnRedigeraFloden.Margin = new Padding(2);
             btnRedigeraFloden.Name = "btnRedigeraFloden";
-            btnRedigeraFloden.Size = new Size(179, 28);
+            btnRedigeraFloden.Size = new Size(157, 21);
             btnRedigeraFloden.TabIndex = 17;
             btnRedigeraFloden.Text = "Redigera";
             btnRedigeraFloden.UseVisualStyleBackColor = false;
@@ -142,10 +143,10 @@
             // btnRaderaFloden
             // 
             btnRaderaFloden.BackColor = SystemColors.GradientActiveCaption;
-            btnRaderaFloden.Location = new Point(266, 742);
-            btnRaderaFloden.Margin = new Padding(2, 3, 2, 3);
+            btnRaderaFloden.Location = new Point(233, 556);
+            btnRaderaFloden.Margin = new Padding(2);
             btnRaderaFloden.Name = "btnRaderaFloden";
-            btnRaderaFloden.Size = new Size(172, 28);
+            btnRaderaFloden.Size = new Size(150, 21);
             btnRaderaFloden.TabIndex = 18;
             btnRaderaFloden.Text = "Radera";
             btnRaderaFloden.UseVisualStyleBackColor = false;
@@ -153,19 +154,19 @@
             // lblMinaKategorier
             // 
             lblMinaKategorier.AutoSize = true;
-            lblMinaKategorier.Location = new Point(1109, 213);
+            lblMinaKategorier.Location = new Point(970, 160);
             lblMinaKategorier.Name = "lblMinaKategorier";
-            lblMinaKategorier.Size = new Size(114, 20);
+            lblMinaKategorier.Size = new Size(90, 15);
             lblMinaKategorier.TabIndex = 19;
             lblMinaKategorier.Text = "Mina kategorier";
             // 
             // btnRaderaKategori
             // 
             btnRaderaKategori.BackColor = SystemColors.GradientActiveCaption;
-            btnRaderaKategori.Location = new Point(1203, 447);
-            btnRaderaKategori.Margin = new Padding(2, 3, 2, 3);
+            btnRaderaKategori.Location = new Point(1053, 335);
+            btnRaderaKategori.Margin = new Padding(2);
             btnRaderaKategori.Name = "btnRaderaKategori";
-            btnRaderaKategori.Size = new Size(122, 28);
+            btnRaderaKategori.Size = new Size(107, 21);
             btnRaderaKategori.TabIndex = 20;
             btnRaderaKategori.Text = "Radera";
             btnRaderaKategori.UseVisualStyleBackColor = false;
@@ -173,10 +174,10 @@
             // btnLaggTillKategori
             // 
             btnLaggTillKategori.BackColor = SystemColors.GradientActiveCaption;
-            btnLaggTillKategori.Location = new Point(1220, 526);
-            btnLaggTillKategori.Margin = new Padding(2, 3, 2, 3);
+            btnLaggTillKategori.Location = new Point(1068, 394);
+            btnLaggTillKategori.Margin = new Padding(2);
             btnLaggTillKategori.Name = "btnLaggTillKategori";
-            btnLaggTillKategori.Size = new Size(105, 28);
+            btnLaggTillKategori.Size = new Size(92, 21);
             btnLaggTillKategori.TabIndex = 21;
             btnLaggTillKategori.Text = "Lägg till";
             btnLaggTillKategori.UseVisualStyleBackColor = false;
@@ -184,36 +185,35 @@
             // 
             // txtLaggTillKategori
             // 
-            txtLaggTillKategori.Location = new Point(1071, 527);
-            txtLaggTillKategori.Margin = new Padding(3, 4, 3, 4);
+            txtLaggTillKategori.Location = new Point(937, 395);
             txtLaggTillKategori.Name = "txtLaggTillKategori";
-            txtLaggTillKategori.Size = new Size(138, 27);
+            txtLaggTillKategori.Size = new Size(121, 23);
             txtLaggTillKategori.TabIndex = 22;
             // 
             // lblLaggTillNyKategori
             // 
             lblLaggTillNyKategori.AutoSize = true;
-            lblLaggTillNyKategori.Location = new Point(1098, 488);
+            lblLaggTillNyKategori.Location = new Point(961, 366);
             lblLaggTillNyKategori.Name = "lblLaggTillNyKategori";
-            lblLaggTillNyKategori.Size = new Size(141, 20);
+            lblLaggTillNyKategori.Size = new Size(111, 15);
             lblLaggTillNyKategori.TabIndex = 23;
             lblLaggTillNyKategori.Text = "Lägg till ny kategori";
             // 
             // lblLaggTillNyKategoriTitel
             // 
             lblLaggTillNyKategoriTitel.AutoSize = true;
-            lblLaggTillNyKategoriTitel.Location = new Point(1012, 530);
+            lblLaggTillNyKategoriTitel.Location = new Point(886, 398);
             lblLaggTillNyKategoriTitel.Name = "lblLaggTillNyKategoriTitel";
-            lblLaggTillNyKategoriTitel.Size = new Size(38, 20);
+            lblLaggTillNyKategoriTitel.Size = new Size(29, 15);
             lblLaggTillNyKategoriTitel.TabIndex = 24;
             lblLaggTillNyKategoriTitel.Text = "Titel";
             // 
             // lblLaggTillFlodeURL
             // 
             lblLaggTillFlodeURL.AutoSize = true;
-            lblLaggTillFlodeURL.Location = new Point(105, 209);
+            lblLaggTillFlodeURL.Location = new Point(92, 157);
             lblLaggTillFlodeURL.Name = "lblLaggTillFlodeURL";
-            lblLaggTillFlodeURL.Size = new Size(35, 20);
+            lblLaggTillFlodeURL.Size = new Size(28, 15);
             lblLaggTillFlodeURL.TabIndex = 25;
             lblLaggTillFlodeURL.Text = "URL";
             lblLaggTillFlodeURL.Click += label1_Click_1;
@@ -221,9 +221,9 @@
             // lblAvsnittBeskrivning
             // 
             lblAvsnittBeskrivning.AutoSize = true;
-            lblAvsnittBeskrivning.Location = new Point(646, 558);
+            lblAvsnittBeskrivning.Location = new Point(565, 418);
             lblAvsnittBeskrivning.Name = "lblAvsnittBeskrivning";
-            lblAvsnittBeskrivning.Size = new Size(84, 20);
+            lblAvsnittBeskrivning.Size = new Size(68, 15);
             lblAvsnittBeskrivning.TabIndex = 26;
             lblAvsnittBeskrivning.Text = "Beskrivning";
             lblAvsnittBeskrivning.TextAlign = ContentAlignment.MiddleCenter;
@@ -231,33 +231,40 @@
             // 
             // txtAvsnittBeskrivning
             // 
-            txtAvsnittBeskrivning.Location = new Point(505, 590);
+            txtAvsnittBeskrivning.Location = new Point(442, 442);
+            txtAvsnittBeskrivning.Margin = new Padding(3, 2, 3, 2);
             txtAvsnittBeskrivning.Name = "txtAvsnittBeskrivning";
-            txtAvsnittBeskrivning.Size = new Size(361, 157);
+            txtAvsnittBeskrivning.Size = new Size(316, 119);
             txtAvsnittBeskrivning.TabIndex = 27;
             txtAvsnittBeskrivning.Text = "";
             // 
             // txtVisaFloden
             // 
             txtVisaFloden.FormattingEnabled = true;
-            txtVisaFloden.Location = new Point(105, 297);
+            txtVisaFloden.ItemHeight = 15;
+            txtVisaFloden.Location = new Point(92, 223);
+            txtVisaFloden.Margin = new Padding(3, 2, 3, 2);
             txtVisaFloden.Name = "txtVisaFloden";
-            txtVisaFloden.Size = new Size(293, 324);
+            txtVisaFloden.Size = new Size(257, 244);
             txtVisaFloden.TabIndex = 28;
+            txtVisaFloden.SelectedIndexChanged += txtVisaFloden_SelectedIndexChanged;
             // 
             // txtVisaAvsnitt
             // 
             txtVisaAvsnitt.FormattingEnabled = true;
-            txtVisaAvsnitt.Location = new Point(505, 294);
+            txtVisaAvsnitt.ItemHeight = 15;
+            txtVisaAvsnitt.Location = new Point(442, 220);
+            txtVisaAvsnitt.Margin = new Padding(3, 2, 3, 2);
             txtVisaAvsnitt.Name = "txtVisaAvsnitt";
-            txtVisaAvsnitt.Size = new Size(361, 244);
+            txtVisaAvsnitt.Size = new Size(316, 184);
             txtVisaAvsnitt.TabIndex = 29;
+            txtVisaAvsnitt.SelectedIndexChanged += txtVisaAvsnitt_SelectedIndexChanged;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1337, 782);
+            ClientSize = new Size(1170, 586);
             Controls.Add(txtVisaAvsnitt);
             Controls.Add(txtVisaFloden);
             Controls.Add(txtAvsnittBeskrivning);
@@ -280,7 +287,6 @@
             Controls.Add(btnNyttFlodeLaggTill);
             Controls.Add(lblHeader);
             Cursor = Cursors.IBeam;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             ResumeLayout(false);
             PerformLayout();

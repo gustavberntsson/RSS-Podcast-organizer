@@ -24,9 +24,11 @@ namespace PoddApp
 
             poddController.HamtaAvsnittFranRss(rssLank);
 
-            txtVisaAvsnitt.DataSource = poddController.HamtaAllaAvsnitt();
+            txtVisaFloden.Items.Add("RSS Flöde");
 
-            txtVisaAvsnitt.DisplayMember = "Rubrik";
+            //txtVisaAvsnitt.DataSource = poddController.HamtaAllaAvsnitt();
+
+            //txtVisaAvsnitt.DisplayMember = "Rubrik";
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,6 +77,18 @@ namespace PoddApp
         }
 
         private void lblAvsnittBeskrivning_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtVisaAvsnitt.DataSource = poddController.HamtaAllaAvsnitt();
+
+            txtVisaAvsnitt.DisplayMember = "Rubrik";
+        }
+
+        private void txtVisaAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
