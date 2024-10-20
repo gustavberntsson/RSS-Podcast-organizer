@@ -41,6 +41,7 @@ public class PoddController
             {
                 Id = item.Id.ToString(),
                 Rubrik = item.Title.Text,
+                Beskrivning = item.Summary.Text,
                 Publiceringsdatum = item.PublishDate
             };
 

@@ -10,19 +10,20 @@ namespace Models
     {
         public string? Id { get; set; }
         public string? Rubrik { get; set; }
+        public string? Beskrivning { get; set; }
         public DateTimeOffset Publiceringsdatum { get; set; }
-
-        public string? Langd { get; set; }
 
         public Avsnitt()
         {
 
         }
 
-        public Avsnitt(string id, string rubrik, DateTimeOffset publiceringsdatum)
+        public Avsnitt(int avsnittsid, string id, string rubrik, string beskrivning, DateTimeOffset publiceringsdatum)
         {
+
             Id = id;
             Rubrik = rubrik;
+            Beskrivning = beskrivning;
             Publiceringsdatum = publiceringsdatum;
         }
 
