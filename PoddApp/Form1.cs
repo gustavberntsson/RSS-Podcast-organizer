@@ -11,7 +11,7 @@ namespace PoddApp
         public Form1()
         {
             InitializeComponent();
-           _allapoddar = poddController.HamtaAllaPoddar();
+            _allapoddar = poddController.HamtaAllaPoddar();
 
         }
 
@@ -22,23 +22,40 @@ namespace PoddApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtNyttFlodeURL != null && cbNyttFlodeKategori != null)
+            // Tror inte den gör någon faktisk kontroll om det är null eller inte
+            if (txtNyttFlodeURL.Text != "")
             {
-                //Om man vill lägga till ett eget namn vid "födseln" så kommenterar man bort dessa och skapar nytt textfält
-                //string namn = txtNyttFlodeNamn.Text;
-                string rssLank = txtNyttFlodeURL.Text;
-                string valdKategori = cbNyttFlodeKategori.Text;
-                poddController.HamtaAvsnittFranRss(rssLank, valdKategori);
-                txtVisaFloden.Items.Add(rssLank);
-                //txtVisaFloden.Items.Add(namn);
+                if (cbNyttFlodeKategori.Text != "")
+                {
+
+                    string podcastNamn = txtNyttFlodeNamn.Text;
+                    string rssLank = txtNyttFlodeURL.Text;
+                    string valdKategori = cbNyttFlodeKategori.Text;
+                    poddController.HamtaAvsnittFranRss(rssLank, valdKategori);
+
+                    if (txtNyttFlodeNamn.Text == "")
+                    {
+                        txtVisaFloden.Items.Add(rssLank);
+                    }
+                    else
+                    {
+                        txtVisaFloden.Items.Add(podcastNamn);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Du måste välja en kategori", "Ingen kategori vald");
+                }
             }
-            
+            else { 
+                MessageBox.Show("Du måste fylla i en giltig podcastlänk", "Ogiltig podcastlänk"); 
+            }
         }
         private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtVisaAvsnitt.Text = "";
             txtVisaAvsnitt.DataSource = null;
-            
+
             //I alla poddar hämtar vi ut indexet vi har klickat på och sedan hämtar vi alla avsnitt från den podden
             //var härleder att det är en lista av avsnitt på grund av HamtaAllaAvsnitt metoden
             var poddVisare = _allapoddar.ElementAt(txtVisaFloden.SelectedIndex).HamtaAllaAvsnitt();
@@ -46,8 +63,8 @@ namespace PoddApp
             txtVisaAvsnitt.DataSource = poddVisare;
 
             txtVisaAvsnitt.DisplayMember = "Rubrik";
- 
-            
+
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,6 +119,11 @@ namespace PoddApp
 
 
         private void txtVisaAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPodcastNamn_Click(object sender, EventArgs e)
         {
 
         }

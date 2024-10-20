@@ -49,6 +49,8 @@
             txtAvsnittBeskrivning = new RichTextBox();
             txtVisaFloden = new ListBox();
             txtVisaAvsnitt = new ListBox();
+            lblLaggTillFlodeNamn = new Label();
+            txtNyttFlodeNamn = new TextBox();
             SuspendLayout();
             // 
             // lblHeader
@@ -113,7 +115,7 @@
             // lblSkapaNyttFlode
             // 
             lblSkapaNyttFlode.AutoSize = true;
-            lblSkapaNyttFlode.Location = new Point(159, 123);
+            lblSkapaNyttFlode.Location = new Point(164, 107);
             lblSkapaNyttFlode.Name = "lblSkapaNyttFlode";
             lblSkapaNyttFlode.Size = new Size(92, 15);
             lblSkapaNyttFlode.TabIndex = 12;
@@ -261,11 +263,31 @@
             txtVisaAvsnitt.TabIndex = 29;
             txtVisaAvsnitt.SelectedIndexChanged += txtVisaAvsnitt_SelectedIndexChanged;
             // 
+            // lblLaggTillFlodeNamn
+            // 
+            lblLaggTillFlodeNamn.AutoSize = true;
+            lblLaggTillFlodeNamn.Location = new Point(76, 128);
+            lblLaggTillFlodeNamn.Name = "lblLaggTillFlodeNamn";
+            lblLaggTillFlodeNamn.Size = new Size(40, 15);
+            lblLaggTillFlodeNamn.TabIndex = 30;
+            lblLaggTillFlodeNamn.Text = "Namn";
+            lblLaggTillFlodeNamn.Click += lblPodcastNamn_Click;
+            // 
+            // txtNyttFlodeNamn
+            // 
+            txtNyttFlodeNamn.Location = new Point(128, 125);
+            txtNyttFlodeNamn.Name = "txtNyttFlodeNamn";
+            txtNyttFlodeNamn.PlaceholderText = "Creepypodden i P3";
+            txtNyttFlodeNamn.Size = new Size(186, 23);
+            txtNyttFlodeNamn.TabIndex = 31;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1170, 586);
+            Controls.Add(txtNyttFlodeNamn);
+            Controls.Add(lblLaggTillFlodeNamn);
             Controls.Add(txtVisaAvsnitt);
             Controls.Add(txtVisaFloden);
             Controls.Add(txtAvsnittBeskrivning);
@@ -316,5 +338,7 @@
         private RichTextBox txtAvsnittBeskrivning;
         private ListBox txtVisaFloden;
         private ListBox txtVisaAvsnitt;
+        private Label lblLaggTillFlodeNamn;
+        private TextBox txtNyttFlodeNamn;
     }
 }
