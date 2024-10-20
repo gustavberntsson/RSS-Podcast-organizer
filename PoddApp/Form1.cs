@@ -47,8 +47,9 @@ namespace PoddApp
                     MessageBox.Show("Du måste välja en kategori", "Ingen kategori vald");
                 }
             }
-            else { 
-                MessageBox.Show("Du måste fylla i en giltig podcastlänk", "Ogiltig podcastlänk"); 
+            else
+            {
+                MessageBox.Show("Du måste fylla i en giltig podcastlänk", "Ogiltig podcastlänk");
             }
         }
         private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,6 +125,41 @@ namespace PoddApp
         }
 
         private void lblPodcastNamn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRaderaKategori_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAvsnittBeskrivning_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblLaggTillNyKategoriTitel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRaderaFloden_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtVisaKategorier_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblMinaKategorier_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblLaggTillNyKategori_Click(object sender, EventArgs e)
         {
 
         }
