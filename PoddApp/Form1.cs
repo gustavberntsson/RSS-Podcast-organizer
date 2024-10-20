@@ -54,18 +54,43 @@ namespace PoddApp
         }
         private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //När vi byter index i listan så tömmer vi listan med avsnitt
             txtVisaAvsnitt.Text = "";
             txtVisaAvsnitt.DataSource = null;
 
-            //I alla poddar hämtar vi ut indexet vi har klickat på och sedan hämtar vi alla avsnitt från den podden
-            //var härleder att det är en lista av avsnitt på grund av HamtaAllaAvsnitt metoden
-            var poddVisare = _allapoddar.ElementAt(txtVisaFloden.SelectedIndex).HamtaAllaAvsnitt();
+            //Kollar om indexet är inom möjliga värden
+            if (txtVisaFloden.SelectedIndex >= 0 && txtVisaFloden.SelectedIndex < _allapoddar.Count)
+            {
+                //I alla poddar hämtar vi ut indexet vi har klickat på och sedan hämtar vi alla avsnitt från den podden
+                //var härleder att det är en lista av avsnitt på grund av HamtaAllaAvsnitt metoden
+                var poddVisare = _allapoddar.ElementAt(txtVisaFloden.SelectedIndex).HamtaAllaAvsnitt();
+                txtVisaAvsnitt.DataSource = poddVisare;
+                txtVisaAvsnitt.DisplayMember = "Rubrik";
+            }
+            else
+            {
+                // Om index skulle vara utanför möjliga värden
+                MessageBox.Show("Något gick fel");
+            }
 
-            txtVisaAvsnitt.DataSource = poddVisare;
+        }
 
-            txtVisaAvsnitt.DisplayMember = "Rubrik";
+        private void txtVisaAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int avsnittIndex = txtVisaAvsnitt.SelectedIndex;
+            txtAvsnittBeskrivning.Text = "";
 
+            if (txtVisaFloden.SelectedIndex >= 0 && avsnittIndex >= 0)
+            {
+                // Hämta den valda podden baserat på index i txtVisaFloden
+                var valdPodd = _allapoddar.ElementAt(txtVisaFloden.SelectedIndex);
 
+                // Hämta avsnittet baserat på index i txtVisaAvsnitt
+                var valtAvsnitt = valdPodd.HamtaAllaAvsnitt().ElementAt(avsnittIndex);
+
+                // Visa beskrivningen av det valda avsnittet
+                txtAvsnittBeskrivning.Text = valtAvsnitt.Beskrivning;
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,13 +142,6 @@ namespace PoddApp
         {
 
         }
-
-
-        private void txtVisaAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void lblPodcastNamn_Click(object sender, EventArgs e)
         {
 
