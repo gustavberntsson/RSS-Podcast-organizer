@@ -11,8 +11,14 @@ namespace PoddApp
         public Form1()
         {
             InitializeComponent();
+
+            poddController.LaddaFranXml("poddar.xml");
+
             _allapoddar = poddController.HamtaAllaPoddar();
+
             FyllKategoriLista(GetKategorier());
+
+            UppdateraPoddLista();
 
         }
 
