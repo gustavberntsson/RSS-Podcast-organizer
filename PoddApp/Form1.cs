@@ -1,6 +1,7 @@
 using BL;
 using DL;
 using Models;
+using System.Xml;
 
 namespace PoddApp
 {
@@ -19,6 +20,8 @@ namespace PoddApp
             FyllKategoriLista(GetKategorier());
 
             UppdateraPoddLista();
+
+            LaddaKategorierFranXml("kategorier.xml");
 
         }
 
@@ -44,7 +47,7 @@ namespace PoddApp
         private void UppdateraPoddLista()
         {
             //Tar bort alla objekt efter man redigerat något för att sedan kunna fylla listan på nytt
-            txtVisaFloden.Items.Clear(); 
+            txtVisaFloden.Items.Clear();
 
             foreach (var podcast in _allapoddar)
             {
@@ -59,7 +62,7 @@ namespace PoddApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             if (txtNyttFlodeURL.Text != "")
             {
                 if (cbNyttFlodeKategori.Text != "")
@@ -138,19 +141,12 @@ namespace PoddApp
         }
 
 
-        
-
-        private void btnLaggTillKategori_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtNyttFlodeURL_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-       
+
 
         private void txtMinaFloden_TextChanged(object sender, EventArgs e)
         {
@@ -160,7 +156,30 @@ namespace PoddApp
 
         private void btnRaderaKategori_Click(object sender, EventArgs e)
         {
+            if (txtVisaKategorier.SelectedIndex >= 0)
+            {
+                
+                string valdKategori = txtVisaKategorier.SelectedItem.ToString();
 
+                DialogResult dialogResult = MessageBox.Show(
+                    $"Är du säker på att du vill radera kategorin '{valdKategori}'?",
+                    "", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    txtVisaKategorier.Items.Remove(valdKategori);
+
+                    FyllKategoriLista(GetKategorier());
+
+                    SparaKategorierTillXml("kategorier.xml");
+
+                    MessageBox.Show($"Kategorin '{valdKategori}' har raderats.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Välj en kategori att radera.");
+            }
         }
 
         private void txtAvsnittBeskrivning_TextChanged(object sender, EventArgs e)
@@ -183,7 +202,7 @@ namespace PoddApp
         private void btnRedigeraFloden_Click(object sender, EventArgs e)
         {
             using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar, GetKategorier()))
-            {     
+            {
                 redigeraEgenskaper.FyllPoddLista();
 
                 if (redigeraEgenskaper.ShowDialog() == DialogResult.OK)
@@ -194,9 +213,81 @@ namespace PoddApp
                 }
                 else if (redigeraEgenskaper.DialogResult == DialogResult.Cancel)
                 {
-                    MessageBox.Show("Dina ändringar har inte sparats");
+                    MessageBox.Show("Inga ändringar har sparats.");
                 }
             }
+        }
+
+        private void txtVisaKategorier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLaggTillKategori_Click(object sender, EventArgs e)
+        {
+            string nyKategori = txtLaggTillKategori.Text.Trim();
+
+            if (!string.IsNullOrEmpty(nyKategori))
+            {
+                if (!txtVisaKategorier.Items.Contains(nyKategori))
+                {
+                    txtVisaKategorier.Items.Add(nyKategori);
+                    FyllKategoriLista(GetKategorier());
+
+                    SparaKategorierTillXml("kategorier.xml");
+                }
+                else
+                {
+                    MessageBox.Show("Kategorin finns redan.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Du måste ange ett kategorinamn.");
+            }
+
+            // Töm fältet efter att kategorin har lagts till
+            txtLaggTillKategori.Text = "";
+        }
+
+        private void SparaKategorierTillXml(string filnamn)
+        {
+            using (XmlWriter writer = XmlWriter.Create(filnamn))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Kategorier");
+
+                foreach (var kategori in txtVisaKategorier.Items)
+                {
+                    writer.WriteElementString("Kategori", kategori.ToString());
+                }
+
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+        }
+
+        private void LaddaKategorierFranXml(string filnamn)
+        {
+            if (!File.Exists(filnamn))
+            {
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filnamn);
+
+            XmlNodeList kategoriNodes = doc.SelectNodes("/Kategorier/Kategori");
+            foreach (XmlNode kategoriNode in kategoriNodes)
+            {
+                string kategori = kategoriNode.InnerText;
+                if (!txtVisaKategorier.Items.Contains(kategori))
+                {
+                    txtVisaKategorier.Items.Add(kategori);
+                }
+            }
+
+            FyllKategoriLista(GetKategorier());
         }
     }
 }
