@@ -5,6 +5,7 @@ namespace DL
 {
     public class AvsnittRepository
     {
+        private string? repositoryLank;
         private string? repositoryTitle;
         private string? repositoryKategori;
         private List<Avsnitt> avsnittLista = new List<Avsnitt>();
@@ -17,6 +18,14 @@ namespace DL
         {
             return avsnittLista;
         }
+        public string GetNamn()
+        {
+            return repositoryTitle;
+        }
+        public string GetKategori()
+        {
+            return repositoryKategori;
+        }
         public void SetNamn(string repositorytitle)
         {
             repositoryTitle = repositorytitle;
@@ -26,7 +35,15 @@ namespace DL
         {
             repositoryKategori = repositorykategori;
         }
-        
+        public string GetLank()
+        {
+            return repositoryLank;
+        }
+        public void SetLank(string repositorylank)
+        {
+            repositoryLank = repositorylank;
+        }
+
     }
 }
 

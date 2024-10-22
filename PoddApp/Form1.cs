@@ -1,6 +1,5 @@
 using BL;
 using DL;
-using Models;
 
 namespace PoddApp
 {
@@ -22,16 +21,23 @@ namespace PoddApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Tror inte den gör någon faktisk kontroll om det är null eller inte
+            
             if (txtNyttFlodeURL.Text != "")
             {
                 if (cbNyttFlodeKategori.Text != "")
                 {
-
-                    string podcastNamn = txtNyttFlodeNamn.Text;
+                    string podcastNamn = "";
                     string rssLank = txtNyttFlodeURL.Text;
                     string valdKategori = cbNyttFlodeKategori.Text;
-                    poddController.HamtaAvsnittFranRss(rssLank, valdKategori);
+                    if (txtNyttFlodeNamn.Text != "")
+                    {
+                        podcastNamn = txtNyttFlodeNamn.Text;
+                    }
+                    else
+                    {
+                        podcastNamn = rssLank;
+                    }
+                    poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
 
                     if (txtNyttFlodeNamn.Text == "")
                     {
@@ -93,30 +99,8 @@ namespace PoddApp
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void Avsnitt_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void btnLaggTillKategori_Click(object sender, EventArgs e)
         {
@@ -128,24 +112,13 @@ namespace PoddApp
 
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void txtMinaFloden_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void lblAvsnittBeskrivning_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void lblPodcastNamn_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnRaderaKategori_Click(object sender, EventArgs e)
         {
@@ -157,10 +130,6 @@ namespace PoddApp
 
         }
 
-        private void lblLaggTillNyKategoriTitel_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnRaderaFloden_Click(object sender, EventArgs e)
         {
@@ -172,14 +141,18 @@ namespace PoddApp
 
         }
 
-        private void lblMinaKategorier_Click(object sender, EventArgs e)
+
+        private void btnRedigeraFloden_Click(object sender, EventArgs e)
         {
+            using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar))
+            {     
+                redigeraEgenskaper.FyllPoddLista();
 
-        }
-
-        private void lblLaggTillNyKategori_Click(object sender, EventArgs e)
-        {
-
+                if (redigeraEgenskaper.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Dina ändringar har sparats");
+                }
+            }
         }
     }
 }

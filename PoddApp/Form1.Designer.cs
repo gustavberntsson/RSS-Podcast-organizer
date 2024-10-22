@@ -31,7 +31,6 @@
             lblHeader = new Label();
             btnNyttFlodeLaggTill = new Button();
             txtNyttFlodeURL = new TextBox();
-            txtVisaKategorier = new RichTextBox();
             cbNyttFlodeKategori = new ComboBox();
             lblSkapaNyttFlodeKategori = new Label();
             lblSkapaNyttFlode = new Label();
@@ -51,6 +50,7 @@
             txtVisaAvsnitt = new ListBox();
             lblLaggTillFlodeNamn = new Label();
             txtNyttFlodeNamn = new TextBox();
+            txtVisaKategorier = new ListBox();
             SuspendLayout();
             // 
             // lblHeader
@@ -90,18 +90,9 @@
             txtNyttFlodeURL.TabIndex = 3;
             txtNyttFlodeURL.TextChanged += txtNyttFlodeURL_TextChanged;
             // 
-            // txtVisaKategorier
-            // 
-            txtVisaKategorier.Location = new Point(729, 122);
-            txtVisaKategorier.Margin = new Padding(4, 3, 4, 3);
-            txtVisaKategorier.Name = "txtVisaKategorier";
-            txtVisaKategorier.Size = new Size(299, 167);
-            txtVisaKategorier.TabIndex = 6;
-            txtVisaKategorier.Text = "";
-            txtVisaKategorier.TextChanged += txtVisaKategorier_TextChanged;
-            // 
             // cbNyttFlodeKategori
             // 
+            cbNyttFlodeKategori.DropDownStyle = ComboBoxStyle.DropDownList;
             cbNyttFlodeKategori.FormattingEnabled = true;
             cbNyttFlodeKategori.Items.AddRange(new object[] { "Skräck", "Komedi" });
             cbNyttFlodeKategori.Location = new Point(110, 184);
@@ -130,7 +121,6 @@
             lblSkapaNyttFlode.Size = new Size(117, 20);
             lblSkapaNyttFlode.TabIndex = 12;
             lblSkapaNyttFlode.Text = "Skapa nytt flöde";
-            lblSkapaNyttFlode.Click += label4_Click;
             // 
             // lblAvsnittLista
             // 
@@ -154,6 +144,7 @@
             btnRedigeraFloden.TabIndex = 17;
             btnRedigeraFloden.Text = "Redigera";
             btnRedigeraFloden.UseVisualStyleBackColor = false;
+            btnRedigeraFloden.Click += btnRedigeraFloden_Click;
             // 
             // btnRaderaFloden
             // 
@@ -177,7 +168,6 @@
             lblMinaKategorier.Size = new Size(90, 15);
             lblMinaKategorier.TabIndex = 19;
             lblMinaKategorier.Text = "Mina kategorier";
-            lblMinaKategorier.Click += lblMinaKategorier_Click;
             // 
             // btnRaderaKategori
             // 
@@ -223,7 +213,6 @@
             lblLaggTillNyKategori.Size = new Size(141, 20);
             lblLaggTillNyKategori.TabIndex = 23;
             lblLaggTillNyKategori.Text = "Lägg till ny kategori";
-            lblLaggTillNyKategori.Click += lblLaggTillNyKategori_Click;
             // 
             // lblLaggTillNyKategoriTitel
             // 
@@ -234,7 +223,6 @@
             lblLaggTillNyKategoriTitel.Size = new Size(29, 15);
             lblLaggTillNyKategoriTitel.TabIndex = 24;
             lblLaggTillNyKategoriTitel.Text = "Titel";
-            lblLaggTillNyKategoriTitel.Click += lblLaggTillNyKategoriTitel_Click;
             // 
             // lblLaggTillFlodeURL
             // 
@@ -245,7 +233,6 @@
             lblLaggTillFlodeURL.Size = new Size(28, 15);
             lblLaggTillFlodeURL.TabIndex = 25;
             lblLaggTillFlodeURL.Text = "URL";
-            lblLaggTillFlodeURL.Click += label1_Click_1;
             // 
             // lblAvsnittBeskrivning
             // 
@@ -256,13 +243,13 @@
             lblAvsnittBeskrivning.Size = new Size(68, 15);
             lblAvsnittBeskrivning.TabIndex = 26;
             lblAvsnittBeskrivning.Text = "Beskrivning";
-            lblAvsnittBeskrivning.Click += lblAvsnittBeskrivning_Click;
             // 
             // txtAvsnittBeskrivning
             // 
             txtAvsnittBeskrivning.Location = new Point(387, 338);
             txtAvsnittBeskrivning.Margin = new Padding(4, 3, 4, 3);
             txtAvsnittBeskrivning.Name = "txtAvsnittBeskrivning";
+            txtAvsnittBeskrivning.ReadOnly = true;
             txtAvsnittBeskrivning.Size = new Size(290, 161);
             txtAvsnittBeskrivning.TabIndex = 27;
             txtAvsnittBeskrivning.Text = "";
@@ -299,7 +286,6 @@
             lblLaggTillFlodeNamn.Size = new Size(40, 15);
             lblLaggTillFlodeNamn.TabIndex = 30;
             lblLaggTillFlodeNamn.Text = "Namn";
-            lblLaggTillFlodeNamn.Click += lblPodcastNamn_Click;
             // 
             // txtNyttFlodeNamn
             // 
@@ -310,11 +296,21 @@
             txtNyttFlodeNamn.Size = new Size(204, 23);
             txtNyttFlodeNamn.TabIndex = 31;
             // 
+            // txtVisaKategorier
+            // 
+            txtVisaKategorier.FormattingEnabled = true;
+            txtVisaKategorier.ItemHeight = 15;
+            txtVisaKategorier.Location = new Point(729, 122);
+            txtVisaKategorier.Name = "txtVisaKategorier";
+            txtVisaKategorier.Size = new Size(298, 169);
+            txtVisaKategorier.TabIndex = 32;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1092, 529);
+            Controls.Add(txtVisaKategorier);
             Controls.Add(txtNyttFlodeNamn);
             Controls.Add(lblLaggTillFlodeNamn);
             Controls.Add(txtVisaAvsnitt);
@@ -334,7 +330,6 @@
             Controls.Add(lblSkapaNyttFlode);
             Controls.Add(lblSkapaNyttFlodeKategori);
             Controls.Add(cbNyttFlodeKategori);
-            Controls.Add(txtVisaKategorier);
             Controls.Add(txtNyttFlodeURL);
             Controls.Add(btnNyttFlodeLaggTill);
             Controls.Add(lblHeader);
@@ -351,7 +346,6 @@
         private Label lblHeader;
         private Button btnNyttFlodeLaggTill;
         private TextBox txtNyttFlodeURL;
-        private RichTextBox txtVisaKategorier;
         private ComboBox cbNyttFlodeKategori;
         private Label lblSkapaNyttFlodeKategori;
         private Label lblSkapaNyttFlode;
@@ -371,5 +365,6 @@
         private ListBox txtVisaAvsnitt;
         private Label lblLaggTillFlodeNamn;
         private TextBox txtNyttFlodeNamn;
+        private ListBox txtVisaKategorier;
     }
 }
