@@ -16,10 +16,11 @@ namespace PoddApp
     {
         private List<AvsnittRepository> _allapoddar;
 
-        public RedigeraEgenskaper(List<AvsnittRepository> allapoddar)
+        public RedigeraEgenskaper(List<AvsnittRepository> allapoddar, List<string> kategorier)
         {
             InitializeComponent();
             _allapoddar = allapoddar;
+            FyllKategoriLista(kategorier);
         }
 
         public void FyllPoddLista()
@@ -32,13 +33,13 @@ namespace PoddApp
             }
         }
 
-        public void FyllKategoriLista()
+        private void FyllKategoriLista(List<string> kategorier)
         {
             //rensar först
             cbChangeCategory.Items.Clear();
-            foreach (var podcast in _allapoddar)
+            foreach (var kategori in kategorier)
             {
-                cbChangeCategory.Items.Add(podcast.GetKategori());
+                    cbChangeCategory.Items.Add(kategori);
             }
         }
         private void cbChoosePodcast_SelectedIndexChanged(object sender, EventArgs e)
@@ -89,7 +90,7 @@ namespace PoddApp
                     }
                     else if (valdAttribut == "Kategori")
                     {
-                        podcast.SetKategori(cbChangeCategory.Text);
+                        podcast.SetKategori(cbChangeCategory.SelectedItem.ToString());
                     }
                     this.DialogResult = DialogResult.OK;
                     this.Close();

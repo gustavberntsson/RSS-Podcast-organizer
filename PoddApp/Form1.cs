@@ -11,7 +11,28 @@ namespace PoddApp
         {
             InitializeComponent();
             _allapoddar = poddController.HamtaAllaPoddar();
+            FyllKategoriLista(GetKategorier());
 
+        }
+
+        public List<string> GetKategorier()
+        {
+            List<string> kategorier = new List<string>();
+            foreach (var item in txtVisaKategorier.Items)
+            {
+                kategorier.Add(item.ToString());
+            }
+            return kategorier;
+        }
+
+        public void FyllKategoriLista(List<string> kategorier)
+        {
+            //Rensar om det skulle finnas något i listan som inte kommer från VisaKategorier listan
+            cbNyttFlodeKategori.Items.Clear();
+            foreach (var kategori in kategorier)
+            {
+                cbNyttFlodeKategori.Items.Add(kategori);
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -144,7 +165,7 @@ namespace PoddApp
 
         private void btnRedigeraFloden_Click(object sender, EventArgs e)
         {
-            using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar))
+            using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar, GetKategorier()))
             {     
                 redigeraEgenskaper.FyllPoddLista();
 

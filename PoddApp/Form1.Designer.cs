@@ -94,7 +94,6 @@
             // 
             cbNyttFlodeKategori.DropDownStyle = ComboBoxStyle.DropDownList;
             cbNyttFlodeKategori.FormattingEnabled = true;
-            cbNyttFlodeKategori.Items.AddRange(new object[] { "Skräck", "Komedi" });
             cbNyttFlodeKategori.Location = new Point(110, 184);
             cbNyttFlodeKategori.Margin = new Padding(4, 3, 4, 3);
             cbNyttFlodeKategori.Name = "cbNyttFlodeKategori";
@@ -300,6 +299,7 @@
             // 
             txtVisaKategorier.FormattingEnabled = true;
             txtVisaKategorier.ItemHeight = 15;
+            txtVisaKategorier.Items.AddRange(new object[] { "Skräck", "Komedi", "Dokumentär", "Nyheter" });
             txtVisaKategorier.Location = new Point(729, 122);
             txtVisaKategorier.Name = "txtVisaKategorier";
             txtVisaKategorier.Size = new Size(298, 169);
