@@ -27,11 +27,15 @@ public class PoddController
     }
 
 
-    public void HamtaAvsnittFranRss(string rssLank, string valdKategori)
+    public void HamtaAvsnittFranRss(string podcastNamn, string rssLank, string valdKategori)
     {
         var avsnittRepository = new AvsnittRepository();
-        //Döper avsnittsrepositoriet till samma som rsslänken, används för att identifiera listan
-        avsnittRepository.SetNamn(rssLank);
+        avsnittRepository.SetLank(rssLank);
+        
+        avsnittRepository.SetNamn(podcastNamn);
+        
+        avsnittRepository.SetKategori(valdKategori);
+
         XmlReader minXMLlasare = XmlReader.Create(rssLank);
         SyndicationFeed avsnittFlode = SyndicationFeed.Load(minXMLlasare);
 
