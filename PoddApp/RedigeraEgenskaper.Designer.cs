@@ -127,6 +127,7 @@
             btnAcceptChange.TabIndex = 9;
             btnAcceptChange.Text = "Godkänn";
             btnAcceptChange.UseVisualStyleBackColor = true;
+            btnAcceptChange.Click += btnAcceptChange_Click;
             // 
             // btnAbortChange
             // 
@@ -136,6 +137,7 @@
             btnAbortChange.TabIndex = 10;
             btnAbortChange.Text = "Avbryt";
             btnAbortChange.UseVisualStyleBackColor = true;
+            btnAbortChange.Click += btnAbortChange_Click;
             // 
             // RedigeraEgenskaper
             // 

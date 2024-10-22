@@ -1,5 +1,6 @@
 using BL;
 using DL;
+using Models;
 
 namespace PoddApp
 {
@@ -32,6 +33,16 @@ namespace PoddApp
             foreach (var kategori in kategorier)
             {
                 cbNyttFlodeKategori.Items.Add(kategori);
+            }
+        }
+        private void UppdateraPoddLista()
+        {
+            //Tar bort alla objekt efter man redigerat något för att sedan kunna fylla listan på nytt
+            txtVisaFloden.Items.Clear(); 
+
+            foreach (var podcast in _allapoddar)
+            {
+                txtVisaFloden.Items.Add(podcast.GetNamn());
             }
         }
 
@@ -172,6 +183,12 @@ namespace PoddApp
                 if (redigeraEgenskaper.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Dina ändringar har sparats");
+                    //Uppdaterar listan efter att ändringarna gått genom
+                    UppdateraPoddLista();
+                }
+                else if (redigeraEgenskaper.DialogResult == DialogResult.Cancel)
+                {
+                    MessageBox.Show("Dina ändringar har inte sparats");
                 }
             }
         }
