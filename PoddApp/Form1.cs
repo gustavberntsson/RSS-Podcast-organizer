@@ -67,9 +67,12 @@ namespace PoddApp
             {
                 if (cbNyttFlodeKategori.Text != "")
                 {
+                    //Skapar en sträng för att lagra podcastnamnet som sedan baseras på om man fyllt i ett eget namn eller ej
                     string podcastNamn = "";
+
                     string rssLank = txtNyttFlodeURL.Text;
                     string valdKategori = cbNyttFlodeKategori.Text;
+
                     if (txtNyttFlodeNamn.Text != "")
                     {
                         podcastNamn = txtNyttFlodeNamn.Text;
@@ -78,15 +81,24 @@ namespace PoddApp
                     {
                         podcastNamn = rssLank;
                     }
-                    poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
+                    try
+                    {
+                        poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
 
-                    if (txtNyttFlodeNamn.Text == "")
-                    {
-                        txtVisaFloden.Items.Add(rssLank);
+                        if (txtNyttFlodeNamn.Text == "")
+                        {
+                            txtVisaFloden.Items.Add(rssLank);
+                        }
+                        else
+                        {
+                            txtVisaFloden.Items.Add(podcastNamn);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        txtVisaFloden.Items.Add(podcastNamn);
+                        // Om länken inte är ett normalt rss flöde i xml format
+                        //MessageBoxButtons och MessageBoxIcon är knappar och ikoner som liknar ett normalt felmeddelande
+                        MessageBox.Show($"Vänligen kontrollera att länken leder till ett rss flöde", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
