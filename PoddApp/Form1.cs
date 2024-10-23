@@ -257,8 +257,48 @@ namespace PoddApp
         }
         private void btnRaderaFloden_Click(object sender, EventArgs e)
         {
+            // Kontrollerar att ett flöde är valt
+            if (txtVisaFloden.SelectedIndex >= 0)
+            {
+                string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
 
+                // Visar en bekräftelseruta
+                DialogResult dialogResult = MessageBox.Show(
+                    $"Är du säker på att du vill radera flödet tillhörande podcasten '{valtPoddNamn}'?",
+                    "Bekräfta radering",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    // Hittar flödet i listan
+                    var poddAttTaBort = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
+
+                    if (poddAttTaBort != null)
+                    {
+                        // Tar bort från listan
+                        _allapoddar.Remove(poddAttTaBort);
+
+                        // Sparar ändringarna till XML
+                        poddController.SparaTillXml("poddar.xml");
+
+                        // Uppdatera lista i  UI
+                        UppdateraPoddLista();
+
+                        // Rensar avsnittslistan och beskrivningen
+                        txtVisaAvsnitt.DataSource = null;
+                        txtAvsnittBeskrivning.Text = "";
+
+                        MessageBox.Show($"Flödet tillhörande podcasten '{valtPoddNamn}' har raderats.");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Välj ett flöde att radera.");
+            }
         }
+
 
         private void txtVisaKategorier_TextChanged(object sender, EventArgs e)
         {
