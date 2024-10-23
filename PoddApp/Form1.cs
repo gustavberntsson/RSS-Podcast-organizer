@@ -92,6 +92,15 @@ namespace PoddApp
                     {
                         podcastNamn = rssLank;
                     }
+
+                    //Kollar så namnet inte redan finns i listan
+                    bool ickeUniktNamn = _allapoddar.Any(p => p.GetNamn() == podcastNamn);
+
+                    if(ickeUniktNamn)
+                    {
+                        MessageBox.Show("Namnet på podcasten är inte unikt", "Byt namn på podcast");
+                        return;
+                    }
                     try
                     {
                         poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
@@ -128,19 +137,28 @@ namespace PoddApp
             txtVisaAvsnitt.Text = "";
             txtVisaAvsnitt.DataSource = null;
 
-            //Kollar om indexet är inom möjliga värden
-            if (txtVisaFloden.SelectedIndex >= 0 && txtVisaFloden.SelectedIndex < _allapoddar.Count)
+            //Kollar om det finns ett valt objekt
+            if (txtVisaFloden.SelectedItem != null)
             {
-                //I alla poddar hämtar vi ut indexet vi har klickat på och sedan hämtar vi alla avsnitt från den podden
-                //var härleder att det är en lista av avsnitt på grund av HamtaAllaAvsnitt metoden
-                var poddVisare = _allapoddar.ElementAt(txtVisaFloden.SelectedIndex).HamtaAllaAvsnitt();
-                txtVisaAvsnitt.DataSource = poddVisare;
-                txtVisaAvsnitt.DisplayMember = "Rubrik";
+                //Hämtar ut namnet på podcasten för att använda som "nyckel"
+                string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
+
+                //Hittar podcasten i listan baserat på namnet
+                var valdPodd = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
+                
+                //Om podden finns
+                if(valdPodd != null)
+                {
+                    var poddVisare = valdPodd.HamtaAllaAvsnitt();
+                
+                    txtVisaAvsnitt.DataSource = poddVisare;
+                    txtVisaAvsnitt.DisplayMember = "Rubrik";
+                }
             }
             else
             {
-                // Om index skulle vara utanför möjliga värden
-                MessageBox.Show("Något gick fel");
+                // Om den inte hittar podcasten
+                MessageBox.Show("Kunde inte hitta någon podcast");
             }
 
         }
@@ -152,14 +170,25 @@ namespace PoddApp
 
             if (txtVisaFloden.SelectedIndex >= 0 && avsnittIndex >= 0)
             {
-                // Hämta den valda podden baserat på index i txtVisaFloden
-                var valdPodd = _allapoddar.ElementAt(txtVisaFloden.SelectedIndex);
+                //Hämtar ut namnet på podcasten för att använda som "nyckel"
+                string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
 
-                // Hämta avsnittet baserat på index i txtVisaAvsnitt
-                var valtAvsnitt = valdPodd.HamtaAllaAvsnitt().ElementAt(avsnittIndex);
+                // Hämta den valda podden baserat på den valda poddens namn
+                var valdPodd = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
+
+                // Hämtar avsnitten för valda podden
+                var valdPoddAvsnittLista = valdPodd.HamtaAllaAvsnitt();
+
+                // Hämtar specifika avsnittet ur listan baserat på index
+                var valtAvsnitt = valdPoddAvsnittLista[avsnittIndex];
 
                 // Visa beskrivningen av det valda avsnittet
                 txtAvsnittBeskrivning.Text = valtAvsnitt.Beskrivning;
+
+                if(txtAvsnittBeskrivning.Text == "")
+                {
+                    txtAvsnittBeskrivning.Text = "Det finns ingen beskrivning för detta avsnitt";
+                }
             }
         }
 
@@ -257,6 +286,12 @@ namespace PoddApp
         private void txtVisaKategorier_SelectedIndexChanged(object sender, EventArgs e)
         {
             UppdateraPoddLista();
+
+            //Om det finns poddar med vald kategori så kommer den välja den första per automatik
+            if(txtVisaFloden.Items.Count > 0)
+            {
+                txtVisaFloden.SelectedIndex = 0;
+            }
         }
 
         private void btnLaggTillKategori_Click(object sender, EventArgs e)

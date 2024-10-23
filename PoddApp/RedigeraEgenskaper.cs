@@ -84,13 +84,25 @@ namespace PoddApp
         {
             string valdPodcast = cbChoosePodcast.SelectedItem.ToString();
             string valdAttribut = cbChooseAttribute.SelectedItem.ToString();
+            string podcastNamn = txtChangeName.Text;
+
             foreach (var podcast in _allapoddar)
             {
                 if (podcast.GetNamn().Equals(valdPodcast))
                 {
                     if (valdAttribut == "Namn")
                     {
-                        podcast.SetNamn(txtChangeName.Text);
+                        if (podcast.GetNamn().Equals(txtChangeName.Text))
+                        {
+                            MessageBox.Show("Podcasten heter redan " + txtChangeName.Text);
+                            return;
+                        }
+                        else
+                        {
+                            podcast.SetNamn(txtChangeName.Text);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
                     else if (valdAttribut == "Kategori")
                     {
