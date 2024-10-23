@@ -86,14 +86,32 @@ namespace PoddApp
                 {
                     if (valdAttribut == "Namn")
                     {
-                        podcast.SetNamn(txtChangeName.Text);
+                        if (podcast.GetNamn().Equals(txtChangeName.Text))
+                        {
+                            MessageBox.Show("Podcasten heter redan " + txtChangeName.Text);
+                            return;
+                        }
+                        else
+                        {
+                            podcast.SetNamn(txtChangeName.Text);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
                     else if (valdAttribut == "Kategori")
                     {
-                        podcast.SetKategori(cbChangeCategory.SelectedItem.ToString());
+                        if (cbChangeCategory.SelectedItem.ToString() == podcast.GetKategori())
+                        {
+                            MessageBox.Show("Podcasten är redan av kategorin " + cbChangeCategory.SelectedItem.ToString());
+                            return;
+                        }
+                        else
+                        {
+                            podcast.SetKategori(cbChangeCategory.SelectedItem.ToString());
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
                     return;
                 }
             }
