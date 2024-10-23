@@ -80,15 +80,25 @@ namespace PoddApp
         {
             string valdPodcast = cbChoosePodcast.SelectedItem.ToString();
             string valdAttribut = cbChooseAttribute.SelectedItem.ToString();
+            string podcastNamn = txtChangeName.Text;
+
             foreach (var podcast in _allapoddar)
             {
                 if (podcast.GetNamn().Equals(valdPodcast))
                 {
                     if (valdAttribut == "Namn")
                     {
-                        if (podcast.GetNamn().Equals(txtChangeName.Text))
+                        if (podcast.GetNamn().Equals(podcastNamn))
                         {
-                            MessageBox.Show("Podcasten heter redan " + txtChangeName.Text);
+                            MessageBox.Show("Podcasten heter redan " + podcastNamn);
+                            return;
+                        }
+                        //Kollar så namnet inte redan finns i listan
+                        bool ickeUniktNamn = _allapoddar.Any(p => p.GetNamn() == podcastNamn);
+
+                        if (ickeUniktNamn)
+                        {
+                            MessageBox.Show("Det finns en annan podcast med det namnet.", "Byt namn på podcast");
                             return;
                         }
                         else
