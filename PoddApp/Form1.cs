@@ -221,7 +221,11 @@ namespace PoddApp
 
         }
 
-
+        private void SparaTillXml()
+        {
+            // Använd den existerande instansen av PoddController
+            poddController.SparaTillXml("poddar.xml");
+        }
         private void btnRaderaFloden_Click(object sender, EventArgs e)
         {
 
@@ -231,18 +235,16 @@ namespace PoddApp
         {
 
         }
-
-
+        
         private void btnRedigeraFloden_Click(object sender, EventArgs e)
         {
-            using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar, GetKategorier()))
+            using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar, GetKategorier(), poddController))
             {
                 redigeraEgenskaper.FyllPoddLista();
 
                 if (redigeraEgenskaper.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Dina ändringar har sparats");
-                    //Uppdaterar listan efter att ändringarna gått genom
                     UppdateraPoddLista();
                 }
                 else if (redigeraEgenskaper.DialogResult == DialogResult.Cancel)

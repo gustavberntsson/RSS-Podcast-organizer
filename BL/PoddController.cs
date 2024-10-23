@@ -85,7 +85,7 @@ public class PoddController
                 writer.WriteEndElement(); // Podcast
             }
 
-            writer.WriteEndElement(); // Podcast
+            writer.WriteEndElement(); // Podcasts
             writer.WriteEndDocument();
         }
     }

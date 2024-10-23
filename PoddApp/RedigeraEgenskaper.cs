@@ -16,10 +16,13 @@ namespace PoddApp
     {
         private List<AvsnittRepository> _allapoddar;
 
-        public RedigeraEgenskaper(List<AvsnittRepository> allapoddar, List<string> kategorier)
+        private readonly PoddController _poddController;
+
+        public RedigeraEgenskaper(List<AvsnittRepository> allapoddar, List<string> kategorier, PoddController poddController)
         {
             InitializeComponent();
             _allapoddar = allapoddar;
+            _poddController = poddController;
             FyllKategoriLista(kategorier);
         }
 
@@ -76,6 +79,7 @@ namespace PoddApp
                 cbChangeCategory.Visible = true;
             }
         }
+
         private void btnAcceptChange_Click(object sender, EventArgs e)
         {
             string valdPodcast = cbChoosePodcast.SelectedItem.ToString();
@@ -86,35 +90,26 @@ namespace PoddApp
                 {
                     if (valdAttribut == "Namn")
                     {
-                        if (podcast.GetNamn().Equals(txtChangeName.Text))
-                        {
-                            MessageBox.Show("Podcasten heter redan " + txtChangeName.Text);
-                            return;
-                        }
-                        else
-                        {
-                            podcast.SetNamn(txtChangeName.Text);
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-                        }
+                        podcast.SetNamn(txtChangeName.Text);
                     }
                     else if (valdAttribut == "Kategori")
                     {
-                        if (cbChangeCategory.SelectedItem.ToString() == podcast.GetKategori())
-                        {
-                            MessageBox.Show("Podcasten är redan av kategorin " + cbChangeCategory.SelectedItem.ToString());
-                            return;
-                        }
-                        else
-                        {
-                            podcast.SetKategori(cbChangeCategory.SelectedItem.ToString());
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-                        }
+                        podcast.SetKategori(cbChangeCategory.SelectedItem.ToString());
                     }
+
+                    // Spara efter att ändringar har gjorts
+                    SparaTillXml();
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                     return;
                 }
             }
+        }
+
+        private void SparaTillXml()
+        {
+            _poddController.SparaTillXml("poddar.xml");
         }
         private void btnAbortChange_Click(object sender, EventArgs e)
         {
