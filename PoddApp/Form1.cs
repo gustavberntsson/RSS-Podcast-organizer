@@ -49,7 +49,18 @@ namespace PoddApp
             //Tar bort alla objekt efter man redigerat något för att sedan kunna fylla listan på nytt
             txtVisaFloden.Items.Clear();
 
-            foreach (var podcast in _allapoddar)
+            // Hämta vald kategori
+            string valdKategori = txtVisaKategorier.SelectedItem?.ToString();
+
+            // Filtrera poddar baserat på vald kategori
+            // Om ingen kategori är vald så kommer den default till "_allapoddar" utan filter
+            // Annars ( : tecknet ) så kommer den filtrera listan efter poddar som matchar kategorin som är vald
+            var filtreradePoddar = string.IsNullOrEmpty(valdKategori) ?
+                _allapoddar :
+                _allapoddar.Where(p => p.GetKategori() == valdKategori).ToList();
+
+            //För varje filtrerad podcast -> populate listan VisaFloden med poddar efter deras namn
+            foreach (var podcast in filtreradePoddar)
             {
                 txtVisaFloden.Items.Add(podcast.GetNamn());
             }
@@ -98,7 +109,7 @@ namespace PoddApp
                     {
                         // Om länken inte är ett normalt rss flöde i xml format
                         //MessageBoxButtons och MessageBoxIcon är knappar och ikoner som liknar ett normalt felmeddelande
-                        MessageBox.Show($"Vänligen kontrollera att länken leder till ett rss flöde", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Vänligen kontrollera att länken leder till ett rss flöde", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -173,19 +184,30 @@ namespace PoddApp
                 
                 string valdKategori = txtVisaKategorier.SelectedItem.ToString();
 
-                DialogResult dialogResult = MessageBox.Show(
-                    $"Är du säker på att du vill radera kategorin '{valdKategori}'?",
-                    "", MessageBoxButtons.YesNo);
-
-                if (dialogResult == DialogResult.Yes)
+                var allaPoddarIValdKategori = _allapoddar.Where(p => p.GetKategori() == valdKategori).ToList();
+                if (allaPoddarIValdKategori.Count > 0)
                 {
-                    txtVisaKategorier.Items.Remove(valdKategori);
+                    MessageBox.Show("Det finns " + allaPoddarIValdKategori.Count + " podd(ar) med denna kategori. "
+                        + "Antingen ta bort dessa poddar eller ändra deras kategori innan du kan fortsätta.",
+                        "Kategori är i bruk",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show(
+                        $"Är du säker på att du vill radera kategorin '{valdKategori}'?",
+                        "", MessageBoxButtons.YesNo);
 
-                    FyllKategoriLista(GetKategorier());
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        txtVisaKategorier.Items.Remove(valdKategori);
 
-                    SparaKategorierTillXml("kategorier.xml");
+                        FyllKategoriLista(GetKategorier());
 
-                    MessageBox.Show($"Kategorin '{valdKategori}' har raderats.");
+                        SparaKategorierTillXml("kategorier.xml");
+
+                        MessageBox.Show($"Kategorin '{valdKategori}' har raderats.");
+                    }
                 }
             }
             else
@@ -232,7 +254,7 @@ namespace PoddApp
 
         private void txtVisaKategorier_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            UppdateraPoddLista();
         }
 
         private void btnLaggTillKategori_Click(object sender, EventArgs e)
