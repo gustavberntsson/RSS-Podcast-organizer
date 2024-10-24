@@ -78,7 +78,7 @@
             btnNyttFlodeLaggTill.TabIndex = 1;
             btnNyttFlodeLaggTill.Text = "Lägg till";
             btnNyttFlodeLaggTill.UseVisualStyleBackColor = false;
-            btnNyttFlodeLaggTill.Click += button1_Click;
+            btnNyttFlodeLaggTill.Click += btnNyttFlodeLaggTill_Click;
             // 
             // txtNyttFlodeURL
             // 

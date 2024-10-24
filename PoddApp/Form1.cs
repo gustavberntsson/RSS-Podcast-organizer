@@ -71,7 +71,7 @@ namespace PoddApp
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnNyttFlodeLaggTill_Click(object sender, EventArgs e)
         {
 
             if (txtNyttFlodeURL.Text != "")
