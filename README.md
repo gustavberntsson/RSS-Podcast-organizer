@@ -14,7 +14,7 @@ A tool for organizing and categorizing your podcast subscriptions through RSS fe
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/username/rss-podcast-organizer.git
+git clone https://github.com/gustavberntsson/RSS-Podcast-organizer.git
 ```
 
 2. Open the project in Visual Studio or your preferred C# IDE
@@ -39,7 +39,7 @@ This project is licensed under the MIT License.
 ```
 MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) 2024 Oskar Andersson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
