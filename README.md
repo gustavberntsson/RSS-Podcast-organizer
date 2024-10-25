@@ -8,7 +8,6 @@ A tool for organizing and categorizing your podcast subscriptions through RSS fe
 - Categorize podcasts by genre, topic, or custom tags
 - Search and filter your podcast collection
 - Automatic RSS feed updates
-- Export and share your podcast lists
 - Support for common RSS formats
 
 ## Installation
@@ -32,7 +31,6 @@ git clone https://github.com/username/rss-podcast-organizer.git
 - Developed in C# with .NET
 - Uses XML/LINQ for RSS parsing
 - Object-oriented architecture for easy maintenance and extensibility
-- Unit tests implemented with xUnit
 
 ## License
 
