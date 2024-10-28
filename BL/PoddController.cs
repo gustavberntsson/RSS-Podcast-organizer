@@ -56,6 +56,7 @@ public class PoddController
         SparaTillXml("poddar.xml");
     }
 
+    //Sparar alla poddar och deras avsnitt till en XML-fil
     public void SparaTillXml(string filnamn)
     {
         using (XmlWriter writer = XmlWriter.Create(filnamn))
@@ -87,8 +88,12 @@ public class PoddController
 
             writer.WriteEndElement(); // Podcasts
             writer.WriteEndDocument();
+
+            //Avslutat XML-dokumentet
         }
     }
+
+    //Läser in poddar och deras avsnitt från en XML-fil och återställr dem till programmet.
     public void LaddaFranXml(string filnamn)
     {
         if (!File.Exists(filnamn))
