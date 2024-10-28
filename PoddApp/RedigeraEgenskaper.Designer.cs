@@ -45,9 +45,10 @@
             cbChooseAttribute.DropDownStyle = ComboBoxStyle.DropDownList;
             cbChooseAttribute.FormattingEnabled = true;
             cbChooseAttribute.Items.AddRange(new object[] { "Namn", "Kategori" });
-            cbChooseAttribute.Location = new Point(150, 51);
+            cbChooseAttribute.Location = new Point(277, 118);
+            cbChooseAttribute.Margin = new Padding(4, 5, 4, 5);
             cbChooseAttribute.Name = "cbChooseAttribute";
-            cbChooseAttribute.Size = new Size(142, 23);
+            cbChooseAttribute.Size = new Size(201, 33);
             cbChooseAttribute.TabIndex = 0;
             cbChooseAttribute.Visible = false;
             cbChooseAttribute.SelectedIndexChanged += cbChooseAttribute_SelectedIndexChanged;
@@ -56,27 +57,30 @@
             // 
             cbChoosePodcast.DropDownStyle = ComboBoxStyle.DropDownList;
             cbChoosePodcast.FormattingEnabled = true;
-            cbChoosePodcast.Location = new Point(150, 22);
+            cbChoosePodcast.Location = new Point(277, 75);
+            cbChoosePodcast.Margin = new Padding(4, 5, 4, 5);
             cbChoosePodcast.Name = "cbChoosePodcast";
-            cbChoosePodcast.Size = new Size(142, 23);
+            cbChoosePodcast.Size = new Size(201, 33);
             cbChoosePodcast.TabIndex = 1;
             cbChoosePodcast.SelectedIndexChanged += cbChoosePodcast_SelectedIndexChanged;
             // 
             // lblChoosePodcast
             // 
             lblChoosePodcast.AutoSize = true;
-            lblChoosePodcast.Location = new Point(45, 22);
+            lblChoosePodcast.Location = new Point(100, 78);
+            lblChoosePodcast.Margin = new Padding(4, 0, 4, 0);
             lblChoosePodcast.Name = "lblChoosePodcast";
-            lblChoosePodcast.Size = new Size(99, 15);
+            lblChoosePodcast.Size = new Size(150, 25);
             lblChoosePodcast.TabIndex = 2;
             lblChoosePodcast.Text = "Podcast att ändra";
             // 
             // lblChooseAttribute
             // 
             lblChooseAttribute.AutoSize = true;
-            lblChooseAttribute.Location = new Point(37, 54);
+            lblChooseAttribute.Location = new Point(86, 121);
+            lblChooseAttribute.Margin = new Padding(4, 0, 4, 0);
             lblChooseAttribute.Name = "lblChooseAttribute";
-            lblChooseAttribute.Size = new Size(107, 15);
+            lblChooseAttribute.Size = new Size(164, 25);
             lblChooseAttribute.TabIndex = 3;
             lblChooseAttribute.Text = "Egenskap att ändra";
             lblChooseAttribute.Visible = false;
@@ -84,9 +88,10 @@
             // lblChangeName
             // 
             lblChangeName.AutoSize = true;
-            lblChangeName.Location = new Point(16, 112);
+            lblChangeName.Location = new Point(56, 207);
+            lblChangeName.Margin = new Padding(4, 0, 4, 0);
             lblChangeName.Name = "lblChangeName";
-            lblChangeName.Size = new Size(128, 15);
+            lblChangeName.Size = new Size(194, 25);
             lblChangeName.TabIndex = 5;
             lblChangeName.Text = "Nytt namn på podcast:";
             lblChangeName.Visible = false;
@@ -94,9 +99,10 @@
             // lblChangeCategory
             // 
             lblChangeCategory.AutoSize = true;
-            lblChangeCategory.Location = new Point(60, 83);
+            lblChangeCategory.Location = new Point(143, 164);
+            lblChangeCategory.Margin = new Padding(4, 0, 4, 0);
             lblChangeCategory.Name = "lblChangeCategory";
-            lblChangeCategory.Size = new Size(70, 15);
+            lblChangeCategory.Size = new Size(107, 25);
             lblChangeCategory.TabIndex = 6;
             lblChangeCategory.Text = "Byt kategori";
             lblChangeCategory.Visible = false;
@@ -105,25 +111,30 @@
             // 
             cbChangeCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cbChangeCategory.FormattingEnabled = true;
-            cbChangeCategory.Location = new Point(150, 80);
+            cbChangeCategory.Location = new Point(277, 161);
+            cbChangeCategory.Margin = new Padding(4, 5, 4, 5);
             cbChangeCategory.Name = "cbChangeCategory";
-            cbChangeCategory.Size = new Size(142, 23);
+            cbChangeCategory.Size = new Size(201, 33);
             cbChangeCategory.TabIndex = 7;
             cbChangeCategory.Visible = false;
             // 
             // txtChangeName
             // 
-            txtChangeName.Location = new Point(150, 109);
+            txtChangeName.Location = new Point(277, 204);
+            txtChangeName.Margin = new Padding(4, 5, 4, 5);
             txtChangeName.Name = "txtChangeName";
-            txtChangeName.Size = new Size(142, 23);
+            txtChangeName.Size = new Size(201, 31);
             txtChangeName.TabIndex = 8;
             txtChangeName.Visible = false;
             // 
             // btnAcceptChange
             // 
-            btnAcceptChange.Location = new Point(90, 192);
+            btnAcceptChange.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnAcceptChange.FlatStyle = FlatStyle.Flat;
+            btnAcceptChange.Location = new Point(143, 299);
+            btnAcceptChange.Margin = new Padding(4, 5, 4, 5);
             btnAcceptChange.Name = "btnAcceptChange";
-            btnAcceptChange.Size = new Size(75, 23);
+            btnAcceptChange.Size = new Size(107, 38);
             btnAcceptChange.TabIndex = 9;
             btnAcceptChange.Text = "Godkänn";
             btnAcceptChange.UseVisualStyleBackColor = true;
@@ -131,9 +142,12 @@
             // 
             // btnAbortChange
             // 
-            btnAbortChange.Location = new Point(260, 192);
+            btnAbortChange.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnAbortChange.FlatStyle = FlatStyle.Flat;
+            btnAbortChange.Location = new Point(305, 299);
+            btnAbortChange.Margin = new Padding(4, 5, 4, 5);
             btnAbortChange.Name = "btnAbortChange";
-            btnAbortChange.Size = new Size(75, 23);
+            btnAbortChange.Size = new Size(107, 38);
             btnAbortChange.TabIndex = 10;
             btnAbortChange.Text = "Avbryt";
             btnAbortChange.UseVisualStyleBackColor = true;
@@ -141,9 +155,9 @@
             // 
             // RedigeraEgenskaper
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(389, 258);
+            ClientSize = new Size(556, 416);
             Controls.Add(btnAbortChange);
             Controls.Add(btnAcceptChange);
             Controls.Add(txtChangeName);
@@ -154,6 +168,7 @@
             Controls.Add(lblChoosePodcast);
             Controls.Add(cbChoosePodcast);
             Controls.Add(cbChooseAttribute);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "RedigeraEgenskaper";
             Text = "Form2";
             ResumeLayout(false);
