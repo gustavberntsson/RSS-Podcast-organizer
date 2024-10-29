@@ -8,7 +8,7 @@ namespace DL
         //Privata variabler för att lagra länkar, namn och kategori av podcasten.
         private string? repositoryLank;
         private string? repositoryTitle;
-        private Kategori kategori;
+        private KategoriRepository kategoriRepo = new KategoriRepository();
         private List<Avsnitt> avsnittLista = new List<Avsnitt>();
 
         //Metoder för att lägga till avsnitt och hämta alla avsnitt.
@@ -22,10 +22,9 @@ namespace DL
         public void SetLank(string lank) => repositoryLank = lank;
         public string GetLank() => repositoryLank;
 
-        public void SetKategori(Kategori kategori) => this.kategori = kategori;
-        public string GetKategori() => kategori?.Namn;
-
-    }
+        public void SetKategori(Kategori kategori) => kategoriRepo.LaggTillKategori(kategori);
+        public string GetKategori() => kategoriRepo.HamtaAllaKategorier().FirstOrDefault()?.Namn;
+}
 
 
 }

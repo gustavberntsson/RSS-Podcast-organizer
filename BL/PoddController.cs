@@ -8,17 +8,12 @@ namespace BL;
 public class PoddController
 {
     private List<AvsnittRepository> allaPoddar;
+    private KategoriRepository kategoriRepo = new KategoriRepository();
 
     public PoddController()
     {
         allaPoddar = new List<AvsnittRepository>();
         
-    }
-
-    //Tar in en lista som parameter för att sedan kunna returnera DEN listans avsnitt, kanske onödig
-    public List<Avsnitt> HamtaAllaAvsnitt(AvsnittRepository avsnittRepository)
-    {
-        return avsnittRepository.HamtaAllaAvsnitt();
     }
 
     public List<AvsnittRepository> HamtaAllaPoddar()
@@ -34,6 +29,7 @@ public class PoddController
         avsnittRepository.SetNamn(podcastNamn);
         
         var kategori = new Kategori(valdKategori);
+        kategoriRepo.LaggTillKategori(kategori);
         avsnittRepository.SetKategori(kategori);
 
         XmlReader minXMLlasare = XmlReader.Create(rssLank);
