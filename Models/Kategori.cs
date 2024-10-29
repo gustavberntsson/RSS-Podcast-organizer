@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    internal interface IKategori
+    public class Kategori
     {
-        string KategoriNamn { get; set; }
+        public string Namn { get; set; }
+
+        public Kategori(string namn)
+        {
+            Namn = namn;
+        }
     }
 }

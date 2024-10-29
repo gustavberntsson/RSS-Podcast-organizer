@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BL;
 using DL;
+using Models;
 
 namespace PoddApp
 {
@@ -106,7 +107,9 @@ namespace PoddApp
                     }
                     else if (valdAttribut == "Kategori")
                     {
-                        podcast.SetKategori(cbChangeCategory.SelectedItem.ToString());
+                        var kategoriNamn = cbChangeCategory.SelectedItem.ToString();
+                        var kategori = new Kategori(kategoriNamn); // Skapa Kategori-objekt
+                        podcast.SetKategori(kategori); // Sätt Kategori-objektet
                     }
 
                     // Spara efter att ändringar har gjorts
