@@ -1,6 +1,7 @@
 using BL;
 using DL;
 using Models;
+using System.ComponentModel.DataAnnotations;
 using System.Xml;
 
 namespace PoddApp
@@ -73,62 +74,37 @@ namespace PoddApp
 
         private void btnNyttFlodeLaggTill_Click(object sender, EventArgs e)
         {
+            string rssLank = txtNyttFlodeURL.Text;
+            string valdKategori = cbNyttFlodeKategori.Text;
+            string podcastNamn = string.IsNullOrEmpty(txtNyttFlodeNamn.Text) ? rssLank : txtNyttFlodeNamn.Text;
 
-            if (txtNyttFlodeURL.Text != "")
+            if (!Validering.KollaTextruta(rssLank))
             {
-                if (cbNyttFlodeKategori.Text != "")
-                {
-                    //Skapar en sträng för att lagra podcastnamnet som sedan baseras på om man fyllt i ett eget namn eller ej
-                    string podcastNamn = "";
-
-                    string rssLank = txtNyttFlodeURL.Text;
-                    string valdKategori = cbNyttFlodeKategori.Text;
-
-                    if (txtNyttFlodeNamn.Text != "")
-                    {
-                        podcastNamn = txtNyttFlodeNamn.Text;
-                    }
-                    else
-                    {
-                        podcastNamn = rssLank;
-                    }
-
-                    //Kollar så namnet inte redan finns i listan
-                    bool ickeUniktNamn = _allapoddar.Any(p => p.GetNamn() == podcastNamn);
-
-                    if(ickeUniktNamn)
-                    {
-                        MessageBox.Show("Namnet på podcasten är inte unikt", "Byt namn på podcast");
-                        return;
-                    }
-                    try
-                    {
-                        poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
-
-                        if (txtNyttFlodeNamn.Text == "")
-                        {
-                            txtVisaFloden.Items.Add(rssLank);
-                        }
-                        else
-                        {
-                            txtVisaFloden.Items.Add(podcastNamn);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        // Om länken inte är ett normalt rss flöde i xml format
-                        //MessageBoxButtons och MessageBoxIcon är knappar och ikoner som liknar ett normalt felmeddelande
-                        MessageBox.Show("Vänligen kontrollera att länken leder till ett rss flöde", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Du måste välja en kategori", "Ingen kategori vald");
-                }
+                MessageBox.Show("Du måste fylla i en giltig RSS-länk", "Ogiltig RSS-länk");
+                return;
             }
-            else
+
+            if (!Validering.KollaKategori(valdKategori))
             {
-                MessageBox.Show("Du måste fylla i en giltig podcastlänk", "Ogiltig podcastlänk");
+                MessageBox.Show("Du måste välja en kategori", "Ingen kategori vald");
+                return;
+            }
+
+            if (!Validering.KollaUniktNamn(_allapoddar, podcastNamn))
+            {
+                MessageBox.Show("Namnet på podcasten är inte unikt", "Byt namn på podcast");
+                return;
+            }
+
+            // Lägger till flöde om all validering lyckas
+            try
+            {
+                poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
+                txtVisaFloden.Items.Add(podcastNamn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Vänligen kontrollera att länken leder till ett RSS-flöde", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
@@ -338,26 +314,26 @@ namespace PoddApp
         {
             string nyKategori = txtLaggTillKategori.Text.Trim();
 
-            if (!string.IsNullOrEmpty(nyKategori))
+            // Kontrollera att textruta ej är tom
+            if (!Validering.KollaTextruta(nyKategori))
             {
-                if (!txtVisaKategorier.Items.Contains(nyKategori))
-                {
-                    txtVisaKategorier.Items.Add(nyKategori);
-                    FyllKategoriLista(GetKategorier());
-
-                    SparaKategorierTillXml("kategorier.xml");
-                }
-                else
-                {
-                    MessageBox.Show("Kategorin finns redan.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Du måste ange ett kategorinamn.");
+                MessageBox.Show("Du måste ange ett kategorinamn.", "Ogiltig kategori");
+                return;
             }
 
-            // Töm fältet efter att kategorin har lagts till
+            // Kontrollera så nytt kategorinamn är unikt
+            if (!Validering.KollaUnikKategori(txtVisaKategorier.Items, nyKategori))
+            {
+                MessageBox.Show("Kategorin finns redan.", "Duplicerad kategori");
+                return;
+            }
+
+            // Om all validering är OK, lägg till ny kategori
+            txtVisaKategorier.Items.Add(nyKategori);
+            FyllKategoriLista(GetKategorier());
+
+            SparaKategorierTillXml("kategorier.xml");
+
             txtLaggTillKategori.Text = "";
         }
 
