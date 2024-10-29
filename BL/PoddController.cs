@@ -41,11 +41,25 @@ public class PoddController
 
         foreach (SyndicationItem item in avsnittFlode.Items)
         {
+            string beskrivning;
+            if (item.Summary != null && !string.IsNullOrEmpty(item.Summary.Text))
+            {
+                beskrivning = item.Summary.Text;
+            }
+            else if (item.Content is TextSyndicationContent textContent)
+            {
+                beskrivning = textContent.Text;
+            }
+            else
+            {
+                beskrivning = "Ingen beskrivning hittades för avsnittet";
+            }
+
             Avsnitt ettAvsnitt = new Avsnitt()
             {
                 Id = item.Id.ToString(),
                 Rubrik = item.Title.Text,
-                Beskrivning = item.Summary.Text,
+                Beskrivning = beskrivning,
                 Publiceringsdatum = item.PublishDate
             };
 
