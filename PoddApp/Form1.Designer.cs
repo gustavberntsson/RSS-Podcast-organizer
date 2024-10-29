@@ -1,5 +1,6 @@
 ﻿namespace PoddApp
 {
+    //Partial class = kan vara uppdelad i flera filer.
     partial class Form1
     {
         /// <summary>
@@ -11,6 +12,8 @@
         ///  Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+        //Städar upp resurser när formuläret inte längre behövs.
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
