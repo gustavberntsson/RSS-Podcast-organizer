@@ -31,43 +31,38 @@ public class PoddController
     {
         var avsnittRepository = new AvsnittRepository();
         avsnittRepository.SetLank(rssLank);
-        
         avsnittRepository.SetNamn(podcastNamn);
         
-        avsnittRepository.SetKategori(valdKategori);
+        var kategori = new Kategori(valdKategori);
+        avsnittRepository.SetKategori(kategori);
 
         XmlReader minXMLlasare = XmlReader.Create(rssLank);
         SyndicationFeed avsnittFlode = SyndicationFeed.Load(minXMLlasare);
 
         foreach (SyndicationItem item in avsnittFlode.Items)
         {
-            string beskrivning;
-            if (item.Summary != null && !string.IsNullOrEmpty(item.Summary.Text))
-            {
-                beskrivning = item.Summary.Text;
-            }
-            else if (item.Content is TextSyndicationContent textContent)
-            {
-                beskrivning = textContent.Text;
-            }
-            else
-            {
-                beskrivning = "Ingen beskrivning hittades för avsnittet";
-            }
+            string beskrivning = HamtaBeskrivning(item);
 
-            Avsnitt ettAvsnitt = new Avsnitt()
-            {
-                Id = item.Id.ToString(),
-                Rubrik = item.Title.Text,
-                Beskrivning = beskrivning,
-                Publiceringsdatum = item.PublishDate
-            };
+            var ettAvsnitt = new Avsnitt(
+                item.Id.ToString(),
+                item.Title.Text,
+                beskrivning);
 
             avsnittRepository.LaggTillAvsnitt(ettAvsnitt);
 
         }
         allaPoddar.Add(avsnittRepository);
         SparaTillXml("poddar.xml");
+    }
+    private string HamtaBeskrivning(SyndicationItem item)
+    {
+        if (item.Summary != null && !string.IsNullOrEmpty(item.Summary.Text))
+            return item.Summary.Text;
+
+        if (item.Content is TextSyndicationContent textContent)
+            return textContent.Text;
+
+        return "Ingen beskrivning hittades för avsnittet";
     }
 
     //Sparar alla poddar och deras avsnitt till en XML-fil
@@ -92,7 +87,6 @@ public class PoddController
                     writer.WriteElementString("Id", avsnitt.Id);
                     writer.WriteElementString("Rubrik", avsnitt.Rubrik);
                     writer.WriteElementString("Beskrivning", avsnitt.Beskrivning);
-                    writer.WriteElementString("Publiceringsdatum", avsnitt.Publiceringsdatum.ToString());
                     writer.WriteEndElement(); // Avsnitt
                 }
 
@@ -123,7 +117,11 @@ public class PoddController
         {
             var avsnittRepository = new AvsnittRepository();
             avsnittRepository.SetNamn(podcastNode["Namn"].InnerText);
-            avsnittRepository.SetKategori(podcastNode["Kategori"].InnerText);
+            
+            var kategoriNamn = podcastNode["Kategori"].InnerText;
+            var kategori = new Kategori(kategoriNamn);
+            avsnittRepository.SetKategori(kategori); // Sätt Kategori-objektet
+
             avsnittRepository.SetLank(podcastNode["RssLank"].InnerText);
 
             XmlNodeList avsnittNodes = podcastNode.SelectNodes("Avsnitt/Avsnitt");
@@ -133,8 +131,7 @@ public class PoddController
                 {
                     Id = avsnittNode["Id"].InnerText,
                     Rubrik = avsnittNode["Rubrik"].InnerText,
-                    Beskrivning = avsnittNode["Beskrivning"].InnerText,
-                    Publiceringsdatum = DateTimeOffset.Parse(avsnittNode["Publiceringsdatum"].InnerText)
+                    Beskrivning = avsnittNode["Beskrivning"].InnerText
                 };
 
                 avsnittRepository.LaggTillAvsnitt(avsnitt);

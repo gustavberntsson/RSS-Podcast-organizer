@@ -12,7 +12,6 @@ namespace Models
         public string? Id { get; set; }
         public string? Rubrik { get; set; }
         public string? Beskrivning { get; set; }
-        public DateTimeOffset Publiceringsdatum { get; set; }
 
         //Standardkonstruktor. Skapar instans för att kunna sätta egenskaper senare.
         public Avsnitt()
@@ -21,13 +20,11 @@ namespace Models
         }
 
         //Overloading (överskuggning). Inte samma som overriding ofc
-        public Avsnitt(int avsnittsid, string id, string rubrik, string beskrivning, DateTimeOffset publiceringsdatum)
+        public Avsnitt(string id, string rubrik, string beskrivning)
         {
-
             Id = id;
             Rubrik = rubrik;
             Beskrivning = beskrivning;
-            Publiceringsdatum = publiceringsdatum;
         }
 
     }
