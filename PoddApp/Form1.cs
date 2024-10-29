@@ -184,33 +184,32 @@ namespace PoddApp
         {
             if (txtVisaKategorier.SelectedIndex >= 0)
             {
-                
                 string valdKategori = txtVisaKategorier.SelectedItem.ToString();
 
-                var allaPoddarIValdKategori = _allapoddar.Where(p => p.GetKategori() == valdKategori).ToList();
-                if (allaPoddarIValdKategori.Count > 0)
+                // Kontrollera om kategorin används
+                if (Validering.KollaKategoriAnvändning(_allapoddar, valdKategori))
                 {
-                    MessageBox.Show("Det finns " + allaPoddarIValdKategori.Count + " podd(ar) med denna kategori. "
+                    MessageBox.Show("Det finns poddar kopplade till denna kategori. "
                         + "Antingen ta bort dessa poddar eller ändra deras kategori innan du kan fortsätta.",
                         "Kategori är i bruk",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-                else
+
+                DialogResult dialogResult = MessageBox.Show(
+                    $"Är du säker på att du vill radera kategorin '{valdKategori}'?",
+                    "Bekräfta radering",
+                    MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
                 {
-                    DialogResult dialogResult = MessageBox.Show(
-                        $"Är du säker på att du vill radera kategorin '{valdKategori}'?",
-                        "", MessageBoxButtons.YesNo);
+                    txtVisaKategorier.Items.Remove(valdKategori);
 
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        txtVisaKategorier.Items.Remove(valdKategori);
+                    FyllKategoriLista(GetKategorier());
 
-                        FyllKategoriLista(GetKategorier());
+                    SparaKategorierTillXml("kategorier.xml");
 
-                        SparaKategorierTillXml("kategorier.xml");
-
-                        MessageBox.Show($"Kategorin '{valdKategori}' har raderats.");
-                    }
+                    MessageBox.Show($"Kategorin '{valdKategori}' har raderats.");
                 }
             }
             else
@@ -231,45 +230,49 @@ namespace PoddApp
         }
         private void btnRaderaFloden_Click(object sender, EventArgs e)
         {
-            // Kontrollerar att ett flöde är valt
-            if (txtVisaFloden.SelectedIndex >= 0)
+            // Kontrollera att ett flöde är markerat
+            if (!Validering.IsSelectedIndexValid(txtVisaFloden.SelectedIndex))
             {
-                string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
-
-                // Visar en bekräftelseruta
-                DialogResult dialogResult = MessageBox.Show(
-                    $"Är du säker på att du vill radera flödet tillhörande podcasten '{valtPoddNamn}'?",
-                    "Bekräfta radering",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    // Hittar flödet i listan
-                    var poddAttTaBort = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
-
-                    if (poddAttTaBort != null)
-                    {
-                        // Tar bort från listan
-                        _allapoddar.Remove(poddAttTaBort);
-
-                        // Sparar ändringarna till XML
-                        poddController.SparaTillXml("poddar.xml");
-
-                        // Uppdatera lista i  UI
-                        UppdateraPoddLista();
-
-                        // Rensar avsnittslistan och beskrivningen
-                        txtVisaAvsnitt.DataSource = null;
-                        txtAvsnittBeskrivning.Text = "";
-
-                        MessageBox.Show($"Flödet tillhörande podcasten '{valtPoddNamn}' har raderats.");
-                    }
-                }
+                MessageBox.Show("Välj ett flöde att radera.", "Inget flöde valt");
+                return;
             }
-            else
+
+            string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
+
+            // Bekräftelseruta innan radering
+            DialogResult dialogResult = MessageBox.Show(
+                $"Är du säker på att du vill radera flödet tillhörande podcasten '{valtPoddNamn}'?",
+                "Bekräfta radering",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("Välj ett flöde att radera.");
+                // Hitta flödet i listan
+                var poddAttTaBort = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
+
+                // Kontrollera att flödet finns innan radering
+                if (Validering.IsObjectNotNull(poddAttTaBort))
+                {
+                    // Tar bort flödet från listan
+                    _allapoddar.Remove(poddAttTaBort);
+
+                    // Sparar ändringarna till XML
+                    poddController.SparaTillXml("poddar.xml");
+
+                    // Uppdaterar lista i UI
+                    UppdateraPoddLista();
+
+                    // Rensar avsnittslistan och beskrivningen
+                    txtVisaAvsnitt.DataSource = null;
+                    txtAvsnittBeskrivning.Text = "";
+
+                    MessageBox.Show($"Flödet tillhörande podcasten '{valtPoddNamn}' har raderats.");
+                }
+                else
+                {
+                    MessageBox.Show("Podcasten kunde inte hittas.", "Fel");
+                }
             }
         }
 

@@ -40,5 +40,24 @@ namespace PoddApp
                 // Kollar så textruta ej är tom
                 return !string.IsNullOrWhiteSpace(text);
             }
+
+        public static bool IsSelectedIndexValid(int index)
+        {
+            // Kontrollera om ett giltigt index är valt i en lista
+            return index >= 0;
         }
+
+        public static bool IsObjectNotNull(object obj)
+        {
+            // Kontrollera att ett objekt inte är null
+            return obj != null;
+        }
+
+        public static bool KollaKategoriAnvändning(List<AvsnittRepository> allaPoddar, string kategori)
+        {
+            // Kontrollera om någon podcast använder den angivna kategorin
+            var poddarMedKategori = allaPoddar.Where(p => p.GetKategori() == kategori).ToList();
+            return poddarMedKategori.Count > 0;
+        }
+    }
     }
