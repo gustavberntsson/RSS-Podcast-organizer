@@ -96,7 +96,6 @@ namespace PoddApp
                 return;
             }
 
-            // Lägger till flöde om all validering lyckas
             try
             {
                 poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
@@ -104,7 +103,7 @@ namespace PoddApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Vänligen kontrollera att länken leder till ett RSS-flöde", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Vänligen kontrollera att länken leder till ett RSS-flöde: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
@@ -141,30 +140,29 @@ namespace PoddApp
 
         private void txtVisaAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int avsnittIndex = txtVisaAvsnitt.SelectedIndex;
-            txtAvsnittBeskrivning.Text = "";
-
-            if (txtVisaFloden.SelectedIndex >= 0 && avsnittIndex >= 0)
+            try
             {
-                //Hämtar ut namnet på podcasten för att använda som "nyckel"
-                string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
+                int avsnittIndex = txtVisaAvsnitt.SelectedIndex;
+                txtAvsnittBeskrivning.Text = "";
 
-                // Hämta den valda podden baserat på den valda poddens namn
-                var valdPodd = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
-
-                // Hämtar avsnitten för valda podden
-                var valdPoddAvsnittLista = valdPodd.HamtaAllaAvsnitt();
-
-                // Hämtar specifika avsnittet ur listan baserat på index
-                var valtAvsnitt = valdPoddAvsnittLista[avsnittIndex];
-
-                // Visa beskrivningen av det valda avsnittet
-                txtAvsnittBeskrivning.Text = valtAvsnitt.Beskrivning;
-
-                if(txtAvsnittBeskrivning.Text == "")
+                if (txtVisaFloden.SelectedIndex >= 0 && avsnittIndex >= 0)
                 {
-                    txtAvsnittBeskrivning.Text = "Det finns ingen beskrivning för detta avsnitt";
+                    string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
+                    var valdPodd = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
+                    var valdPoddAvsnittLista = valdPodd.HamtaAllaAvsnitt();
+                    var valtAvsnitt = valdPoddAvsnittLista[avsnittIndex];
+
+                    txtAvsnittBeskrivning.Text = valtAvsnitt.Beskrivning;
+
+                    if (txtAvsnittBeskrivning.Text == "")
+                    {
+                        txtAvsnittBeskrivning.Text = "Beskrivning saknas";
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ett fel uppstod när avsnittet laddades: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
