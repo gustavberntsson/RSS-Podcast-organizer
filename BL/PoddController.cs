@@ -9,7 +9,6 @@ public class PoddController
 {
     private List<AvsnittRepository> allaPoddar;
     private KategoriRepository kategoriRepo = new KategoriRepository();
-
     public PoddController()
     {
         allaPoddar = new List<AvsnittRepository>();
@@ -150,6 +149,65 @@ public class PoddController
         return kategorier;
     }
 
+    public void UppdateraKategoriNamnIAllaPoddar(string gammalKategori, string nyKategori)
+    {
+        // Hämta alla poddar
+        List<AvsnittRepository> allaPoddar = HamtaAllaPoddar(); // Antar att du har en sådan metod
+        bool harUppdateringar = false;
+
+        // Uppdatera kategorin för varje podd som har den gamla kategorin
+        foreach (var podd in allaPoddar)
+        {
+            if (podd.GetKategori().Equals(gammalKategori))
+            {
+                podd.SetKategori(new Kategori(nyKategori));
+                harUppdateringar = true;
+            }
+        }
+
+        // Spara endast om det faktiskt gjordes några ändringar
+        if (harUppdateringar)
+        {
+            SparaTillXml("poddar.xml");
+        }
+    }
+
+    private void SparaPoddarTillXml(List<AvsnittRepository> poddar)
+    {
+        try
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            doc.AppendChild(xmlDeclaration);
+
+            XmlElement root = doc.CreateElement("Podcasts");
+            doc.AppendChild(root);
+
+            foreach (var podd in poddar)
+            {
+                XmlElement poddElement = doc.CreateElement("Podd");
+
+                XmlElement namn = doc.CreateElement("Namn");
+                namn.InnerText = podd.GetNamn();
+                poddElement.AppendChild(namn);
+
+                XmlElement kategori = doc.CreateElement("Kategori");
+                kategori.InnerText = podd.GetKategori();
+                poddElement.AppendChild(kategori);
+
+                // Lägg till andra nödvändiga element här
+                // Till exempel URL, uppdateringsfrekvens etc.
+
+                root.AppendChild(poddElement);
+            }
+
+            doc.Save("poddar.xml");
+        }
+        catch (Exception ex)
+        {
+            
+        }
+    }
     //Läser in poddar och deras avsnitt från en XML-fil och återställr dem till programmet.
     public void LaddaFranXml(string filnamn)
     {

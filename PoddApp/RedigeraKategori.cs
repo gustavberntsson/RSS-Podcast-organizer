@@ -49,7 +49,7 @@ namespace PoddApp
 
             if (!Validering.KollaKategori(nyKategori))
             {
-                MessageBox.Show("Ogitltigt kategorinamn");
+                MessageBox.Show("Ogiltigt kategorinamn");
                 return;
             }
 
@@ -63,10 +63,13 @@ namespace PoddApp
             if (index != -1)
             {
                 _allakategorier[index] = nyKategori;
+
+                // Uppdatera både kategorier.xml och poddar.xml
+                _poddController.UppdateraKategoriNamnIAllaPoddar(valdKategori, nyKategori);
+                SparaTillXml();
+
                 MessageBox.Show("Kategorin har ändrats");
             }
-
-            SparaTillXml();
 
             this.DialogResult = DialogResult.OK;
             this.Close();
