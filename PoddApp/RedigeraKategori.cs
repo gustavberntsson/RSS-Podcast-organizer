@@ -21,5 +21,10 @@ namespace PoddApp
         {
 
         }
+
+        private void btnSparaKategoriAndring_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

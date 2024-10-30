@@ -97,6 +97,7 @@
             btnSparaKategoriAndring.TabIndex = 6;
             btnSparaKategoriAndring.Text = "Spara";
             btnSparaKategoriAndring.UseVisualStyleBackColor = true;
+            btnSparaKategoriAndring.Click += btnSparaKategoriAndring_Click;
             // 
             // RedigeraKategori
             // 

@@ -393,6 +393,7 @@ namespace PoddApp
                         _allapoddar.Remove(poddAttTaBort);
                         poddController.SparaTillXml("poddar.xml");
                         UppdateraPoddLista();
+                        rbNamn.Checked = true;
 
                         txtVisaAvsnitt.DataSource = null;
                         txtAvsnittBeskrivning.Text = "";
