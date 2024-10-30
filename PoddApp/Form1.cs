@@ -75,6 +75,16 @@ namespace PoddApp
             }
         }
 
+        public void sorteraLista()
+        {
+
+        }
+
+        public void sorteraLista(bool kategoricheck)
+        {
+         
+        }
+
         private void btnNyttFlodeLaggTill_Click(object sender, EventArgs e)
         {
             string rssLank = txtNyttFlodeURL.Text;
@@ -354,5 +364,22 @@ namespace PoddApp
             }
         }
 
+        private void rbNamn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbNamn.Checked)
+            {
+                sorteraLista();
+            }
+        }
+
+        private void rbKategori_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbKategori.Checked)
+            {
+                bool kategori = true;
+                sorteraLista(kategori);
+            }
+        }
     }
 }
+
