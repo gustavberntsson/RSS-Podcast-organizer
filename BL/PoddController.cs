@@ -120,6 +120,36 @@ public class PoddController
         }
     }
 
+    public List<string> LasaKategorierFranXml(string filnamn)
+    {
+        List<string> kategorier = new List<string>();
+        try
+        {
+            if (File.Exists(filnamn))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filnamn);
+                XmlNodeList kategoriNodes = doc.SelectNodes("//Kategori");
+
+                if (kategoriNodes != null)
+                {
+                    foreach (XmlNode node in kategoriNodes)
+                    {
+                        if (node.InnerText != null)
+                        {
+                            kategorier.Add(node.InnerText);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return kategorier;
+    }
+
     //Läser in poddar och deras avsnitt från en XML-fil och återställr dem till programmet.
     public void LaddaFranXml(string filnamn)
     {

@@ -10,6 +10,7 @@ namespace PoddApp
     {
         List<AvsnittRepository> _allapoddar;
         PoddController poddController = new PoddController();
+        private List<string> kategorier;
 
         public Form1()
         {
@@ -22,6 +23,15 @@ namespace PoddApp
             catch (Exception ex)
             {
                 MessageBox.Show($"Ett fel inträffade vid laddning av poddar: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            try
+            {
+                poddController.LasaKategorierFranXml("kategorier.xml");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ett fel inträffade vid laddning av kategorier: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             try
@@ -286,6 +296,7 @@ namespace PoddApp
 
         private void LaddaKategorierFranXml(string filnamn)
         {
+            txtVisaKategorier.Items.Clear();
             if (!File.Exists(filnamn))
             {
                 return;
@@ -329,6 +340,20 @@ namespace PoddApp
                 txtAvsnittBeskrivning.Text = "";
             }
 
+        }
+        private void LaddaKategorier()
+        {
+            kategorier = poddController.LasaKategorierFranXml("kategorier.xml");
+            txtVisaKategorier.Items.Clear();
+            foreach (string kategori in kategorier)
+            {
+                txtVisaKategorier.Items.Add(kategori);
+            }
+
+            if (txtVisaKategorier.Items.Count > 0)
+            {
+                txtVisaKategorier.SelectedIndex = 0;
+            }
         }
 
         private void btnLaggTillKategori_Click(object sender, EventArgs e)
@@ -433,9 +458,9 @@ namespace PoddApp
             {
                 if (redigeraKategori.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("Dina ändringar har sparats");
+                    LaddaKategorierFranXml("kategorier.xml");
                     UppdateraPoddLista();
-                    FyllKategoriLista(GetKategorier());
+                    MessageBox.Show("Dina ändringar har sparats");
                 }
                 else if (redigeraKategori.DialogResult == DialogResult.Cancel)
                 {
