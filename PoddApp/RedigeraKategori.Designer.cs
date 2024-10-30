@@ -44,6 +44,7 @@
             cbRedigeraKategori.Name = "cbRedigeraKategori";
             cbRedigeraKategori.Size = new Size(151, 28);
             cbRedigeraKategori.TabIndex = 0;
+            cbRedigeraKategori.SelectedIndexChanged += cbRedigeraKategori_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -53,7 +54,6 @@
             label1.Size = new Size(128, 20);
             label1.TabIndex = 1;
             label1.Text = "Redigera kategori";
-            label1.Click += label1_Click;
             // 
             // btnAvbrytKategoriAndring
             // 

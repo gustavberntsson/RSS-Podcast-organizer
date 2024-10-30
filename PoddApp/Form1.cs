@@ -81,7 +81,7 @@ namespace PoddApp
             txtVisaFloden.Items.Clear();
 
             //LINQ-query för att sortera poddarna efter namn
-            var SorteraNamn = 
+            var SorteraNamn =
                 from namn in _allapoddar
                 orderby namn.GetNamn()
                 select namn;
@@ -423,6 +423,22 @@ namespace PoddApp
             {
                 bool kategori = true;
                 sorteraLista(kategori);
+            }
+        }
+
+        private void btnRedigeraKategori_Click(object sender, EventArgs e)
+        {
+            using(var redigeraKategori = new RedigeraKategori(_allapoddar, poddController, GetKategorier()))
+            {
+                if (redigeraKategori.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Dina ändringar har sparats");
+                    UppdateraPoddLista();
+                }
+                else if (redigeraKategori.DialogResult == DialogResult.Cancel)
+                {
+                    MessageBox.Show("Dina ändringar har inte sparats");
+                }
             }
         }
     }
