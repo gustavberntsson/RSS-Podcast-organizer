@@ -25,6 +25,7 @@ namespace PoddApp
             _allapoddar = allapoddar;
             _poddController = poddController;
             FyllKategoriLista(kategorier);
+            FyllPoddLista();
         }
 
         public void FyllPoddLista()
