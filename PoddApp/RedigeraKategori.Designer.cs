@@ -39,6 +39,7 @@
             // 
             // cbRedigeraKategori
             // 
+            cbRedigeraKategori.Cursor = Cursors.Hand;
             cbRedigeraKategori.FormattingEnabled = true;
             cbRedigeraKategori.Location = new Point(186, 149);
             cbRedigeraKategori.Name = "cbRedigeraKategori";
@@ -57,15 +58,18 @@
             // 
             // btnAvbrytKategoriAndring
             // 
-            btnAvbrytKategoriAndring.Location = new Point(258, 299);
+            btnAvbrytKategoriAndring.BackColor = SystemColors.ButtonHighlight;
+            btnAvbrytKategoriAndring.Cursor = Cursors.Hand;
+            btnAvbrytKategoriAndring.Location = new Point(271, 294);
             btnAvbrytKategoriAndring.Name = "btnAvbrytKategoriAndring";
             btnAvbrytKategoriAndring.Size = new Size(94, 29);
             btnAvbrytKategoriAndring.TabIndex = 2;
             btnAvbrytKategoriAndring.Text = "Avbryt";
-            btnAvbrytKategoriAndring.UseVisualStyleBackColor = true;
+            btnAvbrytKategoriAndring.UseVisualStyleBackColor = false;
             // 
             // txtRedigeraKategori
             // 
+            txtRedigeraKategori.Cursor = Cursors.IBeam;
             txtRedigeraKategori.Location = new Point(186, 211);
             txtRedigeraKategori.Name = "txtRedigeraKategori";
             txtRedigeraKategori.Size = new Size(151, 27);
@@ -91,12 +95,14 @@
             // 
             // btnSparaKategoriAndring
             // 
-            btnSparaKategoriAndring.Location = new Point(137, 299);
+            btnSparaKategoriAndring.BackColor = SystemColors.ButtonHighlight;
+            btnSparaKategoriAndring.Cursor = Cursors.Hand;
+            btnSparaKategoriAndring.Location = new Point(150, 294);
             btnSparaKategoriAndring.Name = "btnSparaKategoriAndring";
             btnSparaKategoriAndring.Size = new Size(94, 29);
             btnSparaKategoriAndring.TabIndex = 6;
             btnSparaKategoriAndring.Text = "Spara";
-            btnSparaKategoriAndring.UseVisualStyleBackColor = true;
+            btnSparaKategoriAndring.UseVisualStyleBackColor = false;
             btnSparaKategoriAndring.Click += btnSparaKategoriAndring_Click;
             // 
             // RedigeraKategori
