@@ -35,6 +35,10 @@ namespace PoddApp
             {
                 MessageBox.Show($"Ett fel inträffade vid initialiseringen: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            if (txtVisaFloden.Items.Count > 0)
+            {
+                txtVisaFloden.SelectedIndex = 0;
+            }
         }
 
         public List<string> GetKategorier()
@@ -108,6 +112,7 @@ namespace PoddApp
 
         private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             txtVisaAvsnitt.Text = "";
             txtVisaAvsnitt.DataSource = null;
 
