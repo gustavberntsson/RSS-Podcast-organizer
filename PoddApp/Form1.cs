@@ -77,12 +77,54 @@ namespace PoddApp
 
         public void sorteraLista()
         {
+            //Rensar textruta
+            txtVisaFloden.Items.Clear();
 
+            //LINQ-query för att sortera poddarna efter namn
+            var SorteraNamn = 
+                from namn in _allapoddar
+                orderby namn.GetNamn()
+                select namn;
+
+            //Lägger till poddarna i listan
+            foreach (var namn in SorteraNamn)
+            {
+                //Lägger till poddarna i listan
+                txtVisaFloden.Items.Add(namn.GetNamn());
+            }
         }
 
         public void sorteraLista(bool kategoricheck)
         {
-         
+            //Rensar textruta
+            txtVisaFloden.Items.Clear();
+
+            //LINQ-query för att sortera poddarna efter kategori
+            var SorteraKategori =
+                   from kategori in _allapoddar
+                   orderby kategori.GetKategori()
+                   select kategori;
+
+            //Skapar en sträng för att hålla koll på vilken kategori som visas
+            string currentCategory = "";
+            foreach (var pod in SorteraKategori)
+            {
+                //Hämtar kategorin för podden
+                string kategori = pod.GetKategori();
+                if (kategori != currentCategory)
+                {
+                    //Lägger till en linje för att separera kategorierna
+                    if (!string.IsNullOrEmpty(currentCategory))
+                    {
+                        txtVisaFloden.Items.Add("----------");
+                    }
+                    //Lägger till kategorin i listan
+                    currentCategory = kategori;
+                    txtVisaFloden.Items.Add(kategori);
+                }
+                //Lägger till poddarna i listan
+                txtVisaFloden.Items.Add(pod.GetNamn());
+            }
         }
 
         private void btnNyttFlodeLaggTill_Click(object sender, EventArgs e)
@@ -113,6 +155,7 @@ namespace PoddApp
             {
                 poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
                 txtVisaFloden.Items.Add(podcastNamn);
+                rbNamn.Checked = true;
             }
             catch (Exception ex)
             {
@@ -363,6 +406,7 @@ namespace PoddApp
                 MessageBox.Show("Välj en podcast att radera.");
             }
         }
+
 
         private void rbNamn_CheckedChanged(object sender, EventArgs e)
         {
