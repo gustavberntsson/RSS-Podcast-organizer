@@ -68,7 +68,6 @@
             lblHeader.TabIndex = 0;
             lblHeader.Text = "Podcasts";
             lblHeader.TextAlign = ContentAlignment.MiddleCenter;
-            lblHeader.Click += label1_Click;
             // 
             // btnNyttFlodeLaggTill
             // 
@@ -91,7 +90,6 @@
             txtNyttFlodeURL.PlaceholderText = "https://www.exempel.com/rss";
             txtNyttFlodeURL.Size = new Size(233, 27);
             txtNyttFlodeURL.TabIndex = 3;
-            txtNyttFlodeURL.TextChanged += txtNyttFlodeURL_TextChanged;
             // 
             // cbNyttFlodeKategori
             // 
@@ -255,7 +253,6 @@
             txtAvsnittBeskrivning.Size = new Size(331, 213);
             txtAvsnittBeskrivning.TabIndex = 27;
             txtAvsnittBeskrivning.Text = "";
-            txtAvsnittBeskrivning.TextChanged += txtAvsnittBeskrivning_TextChanged;
             // 
             // txtVisaFloden
             // 

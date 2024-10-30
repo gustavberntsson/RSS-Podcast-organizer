@@ -10,20 +10,31 @@ namespace PoddApp
     {
         List<AvsnittRepository> _allapoddar;
         PoddController poddController = new PoddController();
+
         public Form1()
         {
             InitializeComponent();
 
-            poddController.LaddaFranXml("poddar.xml");
+            try
+            {
+                poddController.LaddaFranXml("poddar.xml");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ett fel inträffade vid laddning av poddar: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            _allapoddar = poddController.HamtaAllaPoddar();
-
-            FyllKategoriLista(GetKategorier());
-
-            UppdateraPoddLista();
-
-            LaddaKategorierFranXml("kategorier.xml");
-
+            try
+            {
+                _allapoddar = poddController.HamtaAllaPoddar();
+                FyllKategoriLista(GetKategorier());
+                UppdateraPoddLista();
+                LaddaKategorierFranXml("kategorier.xml");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ett fel inträffade vid initialiseringen: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public List<string> GetKategorier()
@@ -38,38 +49,26 @@ namespace PoddApp
 
         public void FyllKategoriLista(List<string> kategorier)
         {
-            //Rensar om det skulle finnas något i listan som inte kommer från VisaKategorier listan
             cbNyttFlodeKategori.Items.Clear();
             foreach (var kategori in kategorier)
             {
                 cbNyttFlodeKategori.Items.Add(kategori);
             }
         }
+
         private void UppdateraPoddLista()
         {
-            //Tar bort alla objekt efter man redigerat något för att sedan kunna fylla listan på nytt
             txtVisaFloden.Items.Clear();
-
-            // Hämta vald kategori
             string valdKategori = txtVisaKategorier.SelectedItem?.ToString();
 
-            // Filtrera poddar baserat på vald kategori
-            // Om ingen kategori är vald så kommer den default till "_allapoddar" utan filter
-            // Annars ( : tecknet ) så kommer den filtrera listan efter poddar som matchar kategorin som är vald
             var filtreradePoddar = string.IsNullOrEmpty(valdKategori) ?
                 _allapoddar :
                 _allapoddar.Where(p => p.GetKategori() == valdKategori).ToList();
 
-            //För varje filtrerad podcast -> populate listan VisaFloden med poddar efter deras namn
             foreach (var podcast in filtreradePoddar)
             {
                 txtVisaFloden.Items.Add(podcast.GetNamn());
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnNyttFlodeLaggTill_Click(object sender, EventArgs e)
@@ -106,36 +105,28 @@ namespace PoddApp
                 MessageBox.Show($"Vänligen kontrollera att länken leder till ett RSS-flöde: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void txtVisaFloden_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //När vi byter index i listan så tömmer vi listan med avsnitt
             txtVisaAvsnitt.Text = "";
             txtVisaAvsnitt.DataSource = null;
 
-            //Kollar om det finns ett valt objekt
             if (txtVisaFloden.SelectedItem != null)
             {
-                //Hämtar ut namnet på podcasten för att använda som "nyckel"
                 string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
-
-                //Hittar podcasten i listan baserat på namnet
                 var valdPodd = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
-                
-                //Om podden finns
-                if(valdPodd != null)
+
+                if (valdPodd != null)
                 {
                     var poddVisare = valdPodd.HamtaAllaAvsnitt();
-                
                     txtVisaAvsnitt.DataSource = poddVisare;
                     txtVisaAvsnitt.DisplayMember = "Rubrik";
                 }
             }
             else
             {
-                // Om den inte hittar podcasten
                 MessageBox.Show("Kunde inte hitta någon podcast");
             }
-
         }
 
         private void txtVisaAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
@@ -166,27 +157,12 @@ namespace PoddApp
             }
         }
 
-
-        private void txtNyttFlodeURL_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void txtMinaFloden_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void btnRaderaKategori_Click(object sender, EventArgs e)
         {
             if (txtVisaKategorier.SelectedIndex >= 0)
             {
                 string valdKategori = txtVisaKategorier.SelectedItem.ToString();
 
-                // Kontrollera om kategorin används
                 if (Validering.KollaKategoriAnvändning(_allapoddar, valdKategori))
                 {
                     MessageBox.Show("Det finns poddar kopplade till denna kategori. "
@@ -207,7 +183,14 @@ namespace PoddApp
 
                     FyllKategoriLista(GetKategorier());
 
-                    SparaKategorierTillXml("kategorier.xml");
+                    try
+                    {
+                        SparaKategorierTillXml("kategorier.xml");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ett fel inträffade vid sparande av kategorier: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
                     MessageBox.Show($"Kategorin '{valdKategori}' har raderats.");
                 }
@@ -218,140 +201,27 @@ namespace PoddApp
             }
         }
 
-        private void txtAvsnittBeskrivning_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SparaTillXml()
-        {
-            // Använd den existerande instansen av PoddController
-            poddController.SparaTillXml("poddar.xml");
-        }
-        private void btnRaderaFloden_Click(object sender, EventArgs e)
-        {
-            // Kontrollera att ett flöde är markerat
-            if (!Validering.IsSelectedIndexValid(txtVisaFloden.SelectedIndex))
-            {
-                MessageBox.Show("Välj ett flöde att radera.", "Inget flöde valt");
-                return;
-            }
-
-            string valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
-
-            // Bekräftelseruta innan radering
-            DialogResult dialogResult = MessageBox.Show(
-                $"Är du säker på att du vill radera flödet tillhörande podcasten '{valtPoddNamn}'?",
-                "Bekräfta radering",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (dialogResult == DialogResult.Yes)
-            {
-                // Hitta flödet i listan
-                var poddAttTaBort = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
-
-                // Kontrollera att flödet finns innan radering
-                if (Validering.IsObjectNotNull(poddAttTaBort))
-                {
-                    // Tar bort flödet från listan
-                    _allapoddar.Remove(poddAttTaBort);
-
-                    // Sparar ändringarna till XML
-                    poddController.SparaTillXml("poddar.xml");
-
-                    // Uppdaterar lista i UI
-                    UppdateraPoddLista();
-
-                    // Rensar avsnittslistan och beskrivningen
-                    txtVisaAvsnitt.DataSource = null;
-                    txtAvsnittBeskrivning.Text = "";
-
-                    MessageBox.Show($"Flödet tillhörande podcasten '{valtPoddNamn}' har raderats.");
-                }
-                else
-                {
-                    MessageBox.Show("Podcasten kunde inte hittas.", "Fel");
-                }
-            }
-        }
-
-
-        private void txtVisaKategorier_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        
-        private void btnRedigeraFloden_Click(object sender, EventArgs e)
-        {
-            using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar, GetKategorier(), poddController))
-            {
-                redigeraEgenskaper.FyllPoddLista();
-
-                if (redigeraEgenskaper.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show("Dina ändringar har sparats");
-                    UppdateraPoddLista();
-                }
-                else if (redigeraEgenskaper.DialogResult == DialogResult.Cancel)
-                {
-                    MessageBox.Show("Inga ändringar har sparats.");
-                }
-            }
-        }
-
-        private void txtVisaKategorier_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UppdateraPoddLista();
-
-            //Om det finns poddar med vald kategori så kommer den välja den första per automatik
-            if(txtVisaFloden.Items.Count > 0)
-            {
-                txtVisaFloden.SelectedIndex = 0;
-            }
-        }
-
-        private void btnLaggTillKategori_Click(object sender, EventArgs e)
-        {
-            string nyKategori = txtLaggTillKategori.Text.Trim();
-
-            // Kontrollera att textruta ej är tom
-            if (!Validering.KollaTextruta(nyKategori))
-            {
-                MessageBox.Show("Du måste ange ett kategorinamn.", "Ogiltig kategori");
-                return;
-            }
-
-            // Kontrollera så nytt kategorinamn är unikt
-            if (!Validering.KollaUnikKategori(txtVisaKategorier.Items, nyKategori))
-            {
-                MessageBox.Show("Kategorin finns redan.", "Duplicerad kategori");
-                return;
-            }
-
-            // Om all validering är OK, lägg till ny kategori
-            txtVisaKategorier.Items.Add(nyKategori);
-            FyllKategoriLista(GetKategorier());
-
-            SparaKategorierTillXml("kategorier.xml");
-
-            txtLaggTillKategori.Text = "";
-        }
-
         private void SparaKategorierTillXml(string filnamn)
         {
-            using (XmlWriter writer = XmlWriter.Create(filnamn))
+            try
             {
-                writer.WriteStartDocument();
-                writer.WriteStartElement("Kategorier");
-
-                foreach (var kategori in txtVisaKategorier.Items)
+                using (XmlWriter writer = XmlWriter.Create(filnamn))
                 {
-                    writer.WriteElementString("Kategori", kategori.ToString());
-                }
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("Kategorier");
 
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
+                    foreach (var kategori in txtVisaKategorier.Items)
+                    {
+                        writer.WriteElementString("Kategori", kategori.ToString());
+                    }
+
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ett fel uppstod vid sparande till XML: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -362,20 +232,122 @@ namespace PoddApp
                 return;
             }
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filnamn);
-
-            XmlNodeList kategoriNodes = doc.SelectNodes("/Kategorier/Kategori");
-            foreach (XmlNode kategoriNode in kategoriNodes)
+            try
             {
-                string kategori = kategoriNode.InnerText;
-                if (!txtVisaKategorier.Items.Contains(kategori))
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filnamn);
+
+                XmlNodeList kategoriNodes = doc.SelectNodes("/Kategorier/Kategori");
+                foreach (XmlNode kategoriNode in kategoriNodes)
                 {
-                    txtVisaKategorier.Items.Add(kategori);
+                    string kategori = kategoriNode.InnerText;
+                    if (!txtVisaKategorier.Items.Contains(kategori))
+                    {
+                        txtVisaKategorier.Items.Add(kategori);
+                    }
                 }
+
+                FyllKategoriLista(GetKategorier());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ett fel uppstod vid laddning av kategorier från XML: {ex.Message}", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtVisaKategorier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UppdateraPoddLista();
+
+            if (txtVisaFloden.Items.Count > 0)
+            {
+                txtVisaFloden.SelectedIndex = 0;
             }
 
-            FyllKategoriLista(GetKategorier());
+            else
+            {
+                txtVisaAvsnitt.DataSource = null;
+                txtAvsnittBeskrivning.Text = "";
+            }
+
         }
+
+        private void btnLaggTillKategori_Click(object sender, EventArgs e)
+        {
+            string nyKategori = txtLaggTillKategori.Text.Trim();
+
+            if (!Validering.KollaKategori(nyKategori))
+            {
+                MessageBox.Show("Du måste fylla i en kategori", "Ogiltig kategori");
+                return;
+            }
+
+            if (!Validering.KollaUnikKategori(txtVisaKategorier.Items, nyKategori))
+            {
+                MessageBox.Show("Kategorin finns redan", "Kategori finns redan");
+                return;
+            }
+
+            txtVisaKategorier.Items.Add(nyKategori);
+            FyllKategoriLista(GetKategorier());
+
+            SparaKategorierTillXml("kategorier.xml");
+
+            txtLaggTillKategori.Text = "";
+        }
+
+        private void btnRedigeraFloden_Click(object sender, EventArgs e)
+        {
+            using (var redigeraEgenskaper = new RedigeraEgenskaper(_allapoddar, GetKategorier(), poddController))
+            {
+                if (redigeraEgenskaper.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Dina ändringar har sparats");
+                    UppdateraPoddLista();
+                }
+
+                else if (redigeraEgenskaper.DialogResult == DialogResult.Cancel)
+                {
+                    MessageBox.Show("Dina ändringar har inte sparats");
+                }
+            }
+        }
+
+        private void btnRaderaFloden_Click(object sender, EventArgs e)
+        {
+            if (txtVisaFloden.SelectedIndex >= 0)
+            {
+                String valtPoddNamn = txtVisaFloden.SelectedItem.ToString();
+
+                DialogResult dialogResult = MessageBox.Show(
+                $"Är du säker på att du vill radera podcasten '{valtPoddNamn}'?",
+                "Bekräfta radering",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    var poddAttTaBort = _allapoddar.FirstOrDefault(p => p.GetNamn() == valtPoddNamn);
+
+                    if (poddAttTaBort != null)
+                    {
+                        _allapoddar.Remove(poddAttTaBort);
+                        poddController.SparaTillXml("poddar.xml");
+                        UppdateraPoddLista();
+
+                        txtVisaAvsnitt.DataSource = null;
+                        txtAvsnittBeskrivning.Text = "";
+
+                        MessageBox.Show($"Podcasten '{valtPoddNamn}' har raderats.");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Välj en podcast att radera.");
+            }
+        }
+
     }
 }
