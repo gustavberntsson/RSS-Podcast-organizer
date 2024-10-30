@@ -75,6 +75,7 @@ namespace PoddApp
             }
         }
 
+
         public void sorteraLista()
         {
             //Rensar textruta
@@ -259,7 +260,7 @@ namespace PoddApp
             }
         }
 
-        private void SparaKategorierTillXml(string filnamn)
+        public void SparaKategorierTillXml(string filnamn)
         {
             try
             {
@@ -428,12 +429,13 @@ namespace PoddApp
 
         private void btnRedigeraKategori_Click(object sender, EventArgs e)
         {
-            using(var redigeraKategori = new RedigeraKategori(_allapoddar, poddController, GetKategorier()))
+            using (var redigeraKategori = new RedigeraKategori(GetKategorier(), poddController))
             {
                 if (redigeraKategori.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Dina ändringar har sparats");
                     UppdateraPoddLista();
+                    FyllKategoriLista(GetKategorier());
                 }
                 else if (redigeraKategori.DialogResult == DialogResult.Cancel)
                 {

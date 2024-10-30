@@ -97,6 +97,29 @@ public class PoddController
         }
     }
 
+    public void SparaKategorierTillXml(string filnamn, List<string> kategorier)
+    {
+        try
+        {
+            using (XmlWriter writer = XmlWriter.Create(filnamn))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Kategorier");
+
+                foreach (var kategori in kategorier)
+                {
+                    writer.WriteElementString("Kategori", kategori);
+                }
+
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
     //Läser in poddar och deras avsnitt från en XML-fil och återställr dem till programmet.
     public void LaddaFranXml(string filnamn)
     {
@@ -135,6 +158,8 @@ public class PoddController
 
             allaPoddar.Add(avsnittRepository);
         }
+
+
     }
 }
 	
