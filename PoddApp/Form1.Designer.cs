@@ -78,10 +78,10 @@
             btnNyttFlodeLaggTill.BackColor = Color.FromArgb(204, 255, 210, 205);
             btnNyttFlodeLaggTill.Cursor = Cursors.Hand;
             btnNyttFlodeLaggTill.FlatStyle = FlatStyle.Flat;
-            btnNyttFlodeLaggTill.Location = new Point(255, 281);
+            btnNyttFlodeLaggTill.Location = new Point(255, 283);
             btnNyttFlodeLaggTill.Margin = new Padding(5, 4, 5, 4);
             btnNyttFlodeLaggTill.Name = "btnNyttFlodeLaggTill";
-            btnNyttFlodeLaggTill.Size = new Size(101, 33);
+            btnNyttFlodeLaggTill.Size = new Size(120, 32);
             btnNyttFlodeLaggTill.TabIndex = 1;
             btnNyttFlodeLaggTill.Text = "Lägg till";
             btnNyttFlodeLaggTill.UseVisualStyleBackColor = false;
@@ -93,18 +93,17 @@
             txtNyttFlodeURL.Margin = new Padding(5, 4, 5, 4);
             txtNyttFlodeURL.Name = "txtNyttFlodeURL";
             txtNyttFlodeURL.PlaceholderText = "https://www.exempel.com/rss";
-            txtNyttFlodeURL.Size = new Size(233, 27);
+            txtNyttFlodeURL.Size = new Size(249, 27);
             txtNyttFlodeURL.TabIndex = 3;
             // 
             // cbNyttFlodeKategori
             // 
-            cbNyttFlodeKategori.Cursor = Cursors.Hand;
             cbNyttFlodeKategori.DropDownStyle = ComboBoxStyle.DropDownList;
             cbNyttFlodeKategori.FormattingEnabled = true;
             cbNyttFlodeKategori.Location = new Point(126, 245);
             cbNyttFlodeKategori.Margin = new Padding(5, 4, 5, 4);
             cbNyttFlodeKategori.Name = "cbNyttFlodeKategori";
-            cbNyttFlodeKategori.Size = new Size(233, 28);
+            cbNyttFlodeKategori.Size = new Size(249, 28);
             cbNyttFlodeKategori.TabIndex = 8;
             // 
             // lblSkapaNyttFlodeKategori
@@ -122,7 +121,7 @@
             lblSkapaNyttFlode.AutoSize = true;
             lblSkapaNyttFlode.Font = new Font("Arial Rounded MT Bold", 12F);
             lblSkapaNyttFlode.ForeColor = Color.DarkSlateBlue;
-            lblSkapaNyttFlode.Location = new Point(171, 124);
+            lblSkapaNyttFlode.Location = new Point(171, 113);
             lblSkapaNyttFlode.Margin = new Padding(5, 0, 5, 0);
             lblSkapaNyttFlode.Name = "lblSkapaNyttFlode";
             lblSkapaNyttFlode.Size = new Size(167, 23);
@@ -134,7 +133,7 @@
             lblAvsnittLista.AutoSize = true;
             lblAvsnittLista.Font = new Font("Arial Rounded MT Bold", 12F);
             lblAvsnittLista.ForeColor = Color.DarkSlateBlue;
-            lblAvsnittLista.Location = new Point(563, 113);
+            lblAvsnittLista.Location = new Point(562, 113);
             lblAvsnittLista.Margin = new Padding(5, 0, 5, 0);
             lblAvsnittLista.Name = "lblAvsnittLista";
             lblAvsnittLista.Size = new Size(77, 23);
@@ -150,7 +149,7 @@
             btnRedigeraFloden.Location = new Point(107, 632);
             btnRedigeraFloden.Margin = new Padding(5, 4, 5, 4);
             btnRedigeraFloden.Name = "btnRedigeraFloden";
-            btnRedigeraFloden.Size = new Size(127, 32);
+            btnRedigeraFloden.Size = new Size(120, 32);
             btnRedigeraFloden.TabIndex = 17;
             btnRedigeraFloden.Text = "Redigera";
             btnRedigeraFloden.UseVisualStyleBackColor = false;
@@ -187,10 +186,10 @@
             btnRaderaKategori.BackColor = Color.FromArgb(204, 255, 210, 205);
             btnRaderaKategori.Cursor = Cursors.Hand;
             btnRaderaKategori.FlatStyle = FlatStyle.Flat;
-            btnRaderaKategori.Location = new Point(1086, 391);
+            btnRaderaKategori.Location = new Point(1053, 403);
             btnRaderaKategori.Margin = new Padding(1, 3, 1, 3);
             btnRaderaKategori.Name = "btnRaderaKategori";
-            btnRaderaKategori.Size = new Size(87, 28);
+            btnRaderaKategori.Size = new Size(120, 32);
             btnRaderaKategori.TabIndex = 20;
             btnRaderaKategori.Text = "Radera";
             btnRaderaKategori.UseVisualStyleBackColor = false;
@@ -201,10 +200,10 @@
             btnLaggTillKategori.BackColor = Color.FromArgb(204, 255, 210, 205);
             btnLaggTillKategori.Cursor = Cursors.Hand;
             btnLaggTillKategori.FlatStyle = FlatStyle.Flat;
-            btnLaggTillKategori.Location = new Point(960, 541);
+            btnLaggTillKategori.Location = new Point(1094, 537);
             btnLaggTillKategori.Margin = new Padding(5, 4, 5, 4);
             btnLaggTillKategori.Name = "btnLaggTillKategori";
-            btnLaggTillKategori.Size = new Size(89, 29);
+            btnLaggTillKategori.Size = new Size(120, 32);
             btnLaggTillKategori.TabIndex = 21;
             btnLaggTillKategori.Text = "Lägg till";
             btnLaggTillKategori.UseVisualStyleBackColor = false;
@@ -212,7 +211,7 @@
             // 
             // txtLaggTillKategori
             // 
-            txtLaggTillKategori.Location = new Point(937, 499);
+            txtLaggTillKategori.Location = new Point(937, 540);
             txtLaggTillKategori.Margin = new Padding(5, 4, 5, 4);
             txtLaggTillKategori.Name = "txtLaggTillKategori";
             txtLaggTillKategori.Size = new Size(133, 27);
@@ -223,7 +222,7 @@
             lblLaggTillNyKategori.AutoSize = true;
             lblLaggTillNyKategori.Font = new Font("Arial Rounded MT Bold", 12F);
             lblLaggTillNyKategori.ForeColor = Color.DarkSlateBlue;
-            lblLaggTillNyKategori.Location = new Point(923, 451);
+            lblLaggTillNyKategori.Location = new Point(923, 492);
             lblLaggTillNyKategori.Margin = new Padding(5, 0, 5, 0);
             lblLaggTillNyKategori.Name = "lblLaggTillNyKategori";
             lblLaggTillNyKategori.Size = new Size(201, 23);
@@ -233,7 +232,7 @@
             // lblLaggTillNyKategoriTitel
             // 
             lblLaggTillNyKategoriTitel.AutoSize = true;
-            lblLaggTillNyKategoriTitel.Location = new Point(881, 501);
+            lblLaggTillNyKategoriTitel.Location = new Point(881, 542);
             lblLaggTillNyKategoriTitel.Margin = new Padding(5, 0, 5, 0);
             lblLaggTillNyKategoriTitel.Name = "lblLaggTillNyKategoriTitel";
             lblLaggTillNyKategoriTitel.Size = new Size(38, 20);
@@ -274,7 +273,6 @@
             // 
             // txtVisaFloden
             // 
-            txtVisaFloden.Cursor = Cursors.Hand;
             txtVisaFloden.FormattingEnabled = true;
             txtVisaFloden.Location = new Point(107, 323);
             txtVisaFloden.Margin = new Padding(5, 4, 5, 4);
@@ -285,7 +283,6 @@
             // 
             // txtVisaAvsnitt
             // 
-            txtVisaAvsnitt.Cursor = Cursors.Hand;
             txtVisaAvsnitt.FormattingEnabled = true;
             txtVisaAvsnitt.Location = new Point(442, 163);
             txtVisaAvsnitt.Margin = new Padding(5, 4, 5, 4);
@@ -309,12 +306,11 @@
             txtNyttFlodeNamn.Location = new Point(126, 165);
             txtNyttFlodeNamn.Margin = new Padding(5, 4, 5, 4);
             txtNyttFlodeNamn.Name = "txtNyttFlodeNamn";
-            txtNyttFlodeNamn.Size = new Size(233, 27);
+            txtNyttFlodeNamn.Size = new Size(249, 27);
             txtNyttFlodeNamn.TabIndex = 31;
             // 
             // txtVisaKategorier
             // 
-            txtVisaKategorier.Cursor = Cursors.Hand;
             txtVisaKategorier.FormattingEnabled = true;
             txtVisaKategorier.Location = new Point(833, 163);
             txtVisaKategorier.Margin = new Padding(3, 4, 3, 4);
@@ -365,10 +361,10 @@
             btnRedigeraKategori.BackColor = Color.FromArgb(204, 255, 210, 205);
             btnRedigeraKategori.Cursor = Cursors.Hand;
             btnRedigeraKategori.FlatStyle = FlatStyle.Flat;
-            btnRedigeraKategori.Location = new Point(833, 391);
+            btnRedigeraKategori.Location = new Point(833, 403);
             btnRedigeraKategori.Margin = new Padding(1, 3, 1, 3);
             btnRedigeraKategori.Name = "btnRedigeraKategori";
-            btnRedigeraKategori.Size = new Size(87, 28);
+            btnRedigeraKategori.Size = new Size(120, 32);
             btnRedigeraKategori.TabIndex = 36;
             btnRedigeraKategori.Text = "Redigera";
             btnRedigeraKategori.UseVisualStyleBackColor = false;
@@ -378,6 +374,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.InactiveBorder;
             ClientSize = new Size(1248, 705);
             Controls.Add(btnRedigeraKategori);
             Controls.Add(rbKategori);

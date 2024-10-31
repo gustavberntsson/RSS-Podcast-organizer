@@ -40,6 +40,7 @@ namespace PoddApp
                 FyllKategoriLista(GetKategorier());
                 UppdateraPoddLista();
                 LaddaKategorierFranXml("kategorier.xml");
+                rbNamn.Checked = true;
             }
             catch (Exception ex)
             {
@@ -460,7 +461,7 @@ namespace PoddApp
                 {
                     LaddaKategorierFranXml("kategorier.xml");
                     UppdateraPoddLista();
-                    MessageBox.Show("Dina ändringar har sparats");
+                    rbNamn.Checked = true;
                 }
                 else if (redigeraKategori.DialogResult == DialogResult.Cancel)
                 {
