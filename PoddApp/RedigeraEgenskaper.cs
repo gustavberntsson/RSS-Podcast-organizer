@@ -84,42 +84,68 @@ namespace PoddApp
 
         private void btnAcceptChange_Click(object sender, EventArgs e)
         {
-            string valdPodcast = cbChoosePodcast.SelectedItem.ToString();
-            string valdAttribut = cbChooseAttribute.SelectedItem.ToString();
-            string podcastNamn = txtChangeName.Text;
-
-            foreach (var podcast in _allapoddar)
+            try
             {
-                if (podcast.GetNamn().Equals(valdPodcast))
+                if (cbChoosePodcast.SelectedItem == null)
                 {
-                    if (valdAttribut == "Namn")
-                    {
-                        if (podcast.GetNamn().Equals(txtChangeName.Text))
-                        {
-                            MessageBox.Show("Podcasten heter redan " + txtChangeName.Text);
-                            return;
-                        }
-                        else
-                        {
-                            podcast.SetNamn(txtChangeName.Text);
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-                        }
-                    }
-                    else if (valdAttribut == "Kategori")
-                    {
-                        var kategoriNamn = cbChangeCategory.SelectedItem.ToString();
-                        var kategori = new Kategori(kategoriNamn); // Skapa Kategori-objekt
-                        podcast.SetKategori(kategori); // Sätt Kategori-objektet
-                    }
-
-                    // Spara efter att ändringar har gjorts
-                    SparaTillXml();
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    MessageBox.Show("Ingen podcast vald", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if (cbChooseAttribute.SelectedItem == null)
+                {
+                    MessageBox.Show("Du måste välja vilken egenskap du vill ändra", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string valdPodcast = cbChoosePodcast.SelectedItem.ToString();
+                string valdAttribut = cbChooseAttribute.SelectedItem.ToString();
+
+                foreach (var podcast in _allapoddar)
+                {
+                    if (podcast.GetNamn().Equals(valdPodcast))
+                    {
+                        if (valdAttribut == "Namn")
+                        {
+                            if (string.IsNullOrWhiteSpace(txtChangeName.Text))
+                            {
+                                MessageBox.Show("Du måste ange ett nytt namn", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            if (podcast.GetNamn().Equals(txtChangeName.Text))
+                            {
+                                MessageBox.Show("Podcasten heter redan " + txtChangeName.Text);
+                                return;
+                            }
+                            else
+                            {
+                                podcast.SetNamn(txtChangeName.Text);
+                            }
+                        }
+                        else if (valdAttribut == "Kategori")
+                        {
+                            if (cbChangeCategory.SelectedItem == null)
+                            {
+                                MessageBox.Show("Du måste välja en ny kategori", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            var kategoriNamn = cbChangeCategory.SelectedItem.ToString();
+                            var kategori = new Kategori(kategoriNamn);
+                            podcast.SetKategori(kategori);
+                        }
+
+                        SparaTillXml();
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ett fel uppstod: " + ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

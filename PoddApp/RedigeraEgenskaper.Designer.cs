@@ -172,7 +172,7 @@
             Controls.Add(cbChooseAttribute);
             Margin = new Padding(3, 4, 3, 4);
             Name = "RedigeraEgenskaper";
-            Text = "Form2";
+            Text = "Redigera flöde";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -118,7 +118,7 @@
             Controls.Add(label1);
             Controls.Add(cbRedigeraKategori);
             Name = "RedigeraKategori";
-            Text = "RedigeraKategori";
+            Text = "Redigera kategori";
             ResumeLayout(false);
             PerformLayout();
         }
