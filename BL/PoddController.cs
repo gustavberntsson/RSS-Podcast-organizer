@@ -96,7 +96,7 @@ public class PoddController
         }
     }
 
-    public async Task SparaKategorierTillXml(string filnamn, List<string> kategorier)
+    public void SparaKategorierTillXml(string filnamn, List<string> kategorier)
     {
         try
         {

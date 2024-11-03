@@ -82,7 +82,7 @@ namespace PoddApp
             }
         }
 
-        private async void btnAcceptChange_Click(object sender, EventArgs e)
+        private void btnAcceptChange_Click(object sender, EventArgs e)
         {
             try
             {
@@ -136,8 +136,7 @@ namespace PoddApp
                             podcast.SetKategori(kategori);
                         }
 
-                        //Asynkront spara till XML
-                        await SparaTillXml();
+                        SparaTillXml();
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                         return;
@@ -150,9 +149,9 @@ namespace PoddApp
             }
         }
 
-        private async Task SparaTillXml()
+        private void SparaTillXml()
         {
-            await _poddController.SparaTillXml("poddar.xml");
+            _poddController.SparaTillXml("poddar.xml");
         }
         private void btnAbortChange_Click(object sender, EventArgs e)
         {

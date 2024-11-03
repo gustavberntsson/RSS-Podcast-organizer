@@ -30,7 +30,7 @@ namespace PoddApp
             FyllKategoriLista();
         }
 
-        private async void btnSparaKategoriAndring_Click(object sender, EventArgs e)
+        private void btnSparaKategoriAndring_Click(object sender, EventArgs e)
         {
             if (cbRedigeraKategori.SelectedItem == null)
             {
@@ -64,9 +64,9 @@ namespace PoddApp
             {
                 _allakategorier[index] = nyKategori;
 
-                // Uppdatera både kategorier.xml och poddar.xml asynkront
+                // Uppdatera både kategorier.xml och poddar.xml
                 _poddController.UppdateraKategoriNamnIAllaPoddar(valdKategori, nyKategori);
-                await SparaTillXml();
+                SparaTillXml();
 
                 MessageBox.Show("Kategorin har ändrats");
             }
@@ -75,9 +75,9 @@ namespace PoddApp
             this.Close();
         }
 
-        private async Task SparaTillXml()
+        private void SparaTillXml()
         {
-            await _poddController.SparaKategorierTillXml("kategorier.xml", _allakategorier);
+            _poddController.SparaKategorierTillXml("kategorier.xml", _allakategorier);
         }
         private void FyllKategoriLista()
         {
