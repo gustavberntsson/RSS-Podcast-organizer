@@ -21,7 +21,7 @@ public class PoddController
     }
 
 
-    public async Task HamtaAvsnittFranRss(string podcastNamn, string rssLank, string valdKategori)
+    public void HamtaAvsnittFranRss(string podcastNamn, string rssLank, string valdKategori)
     {
         var avsnittRepository = new AvsnittRepository();
         avsnittRepository.SetLank(rssLank);
@@ -31,26 +31,23 @@ public class PoddController
         kategoriRepo.LaggTillKategori(kategori);
         avsnittRepository.SetKategori(kategori);
 
-        using (XmlReader minXMLlasare = XmlReader.Create(rssLank))
+        XmlReader minXMLlasare = XmlReader.Create(rssLank);
+        SyndicationFeed avsnittFlode = SyndicationFeed.Load(minXMLlasare);
+
+        foreach (SyndicationItem item in avsnittFlode.Items)
         {
-            SyndicationFeed avsnittFlode = SyndicationFeed.Load(minXMLlasare);
+            string beskrivning = HamtaBeskrivning(item);
 
-            foreach (SyndicationItem item in avsnittFlode.Items)
-            {
-                string beskrivning = HamtaBeskrivning(item);
+            var ettAvsnitt = new Avsnitt(
+                item.Id.ToString(),
+                item.Title.Text,
+                beskrivning);
 
-                var ettAvsnitt = new Avsnitt(
-                    item.Id.ToString(),
-                    item.Title.Text,
-                    beskrivning);
+            avsnittRepository.LaggTillAvsnitt(ettAvsnitt);
 
-                avsnittRepository.LaggTillAvsnitt(ettAvsnitt);
-
-            }
         }
-
         allaPoddar.Add(avsnittRepository);
-        await SparaTillXml("poddar.xml");
+        SparaTillXml("poddar.xml");
     }
     private string HamtaBeskrivning(SyndicationItem item)
     {
@@ -64,7 +61,7 @@ public class PoddController
     }
 
     //Sparar alla poddar och deras avsnitt till en XML-fil
-    public async Task SparaTillXml(string filnamn)
+    public void SparaTillXml(string filnamn)
     {
         using (XmlWriter writer = XmlWriter.Create(filnamn))
         {
@@ -212,7 +209,7 @@ public class PoddController
         }
     }
     //Läser in poddar och deras avsnitt från en XML-fil och återställr dem till programmet.
-    public async Task LaddaFranXml(string filnamn)
+    public void LaddaFranXml(string filnamn)
     {
         if (!File.Exists(filnamn))
         {
@@ -220,7 +217,7 @@ public class PoddController
         }
 
         XmlDocument doc = new XmlDocument();
-        await Task.Run(() => doc.Load(filnamn)); //Ladda xml dokument asynkront
+        doc.Load(filnamn);
 
         XmlNodeList podcastNodes = doc.SelectNodes("/Podcasts/Podcast");
         foreach (XmlNode podcastNode in podcastNodes)
@@ -249,6 +246,8 @@ public class PoddController
 
             allaPoddar.Add(avsnittRepository);
         }
+
+
     }
 }
 	
