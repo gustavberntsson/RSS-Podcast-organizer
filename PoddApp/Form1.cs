@@ -394,11 +394,13 @@ namespace PoddApp
                 {
                     MessageBox.Show("Dina ändringar har sparats");
                     UppdateraPoddLista();
+                    rbNamn.Checked = true;
                 }
 
                 else if (redigeraEgenskaper.DialogResult == DialogResult.Cancel)
                 {
                     MessageBox.Show("Dina ändringar har inte sparats");
+                    rbNamn.Checked = true;
                 }
             }
         }
@@ -432,6 +434,7 @@ namespace PoddApp
 
                         MessageBox.Show($"Podcasten '{valtPoddNamn}' har raderats.");
                     }
+                    rbNamn.Checked = true;
                 }
             }
             else
@@ -443,18 +446,30 @@ namespace PoddApp
 
         private void rbNamn_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbNamn.Checked)
+            try
             {
-                sorteraLista();
+                if (rbNamn.Checked)
+                {
+                    sorteraLista();
+                }
+            } catch {
+                MessageBox.Show("Det fanns inga poddar att sortera", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void rbKategori_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbKategori.Checked)
+            try
             {
-                bool kategori = true;
-                sorteraLista(kategori);
+                if (rbKategori.Checked)
+                {
+                    bool kategori = true;
+                    sorteraLista(kategori);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Det fanns inga poddar att sortera", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -471,6 +486,7 @@ namespace PoddApp
                 else if (redigeraKategori.DialogResult == DialogResult.Cancel)
                 {
                     MessageBox.Show("Dina ändringar har inte sparats");
+                    rbNamn.Checked = true;
                 }
             }
         }

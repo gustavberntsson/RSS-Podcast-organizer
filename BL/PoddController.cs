@@ -122,6 +122,7 @@ public class PoddController
         }
         catch (Exception ex)
         {
+            Console.Write(ex.ToString());
         }
     }
 
@@ -134,7 +135,7 @@ public class PoddController
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(filnamn);
-                XmlNodeList kategoriNodes = doc.SelectNodes("//Kategori");
+                XmlNodeList? kategoriNodes = doc.SelectNodes("//Kategori");
 
                 if (kategoriNodes != null)
                 {
@@ -150,7 +151,7 @@ public class PoddController
         }
         catch (Exception ex)
         {
-
+            Console.WriteLine(ex.ToString());
         }
         return kategorier;
     }
@@ -211,7 +212,7 @@ public class PoddController
         }
         catch (Exception ex)
         {
-            
+            Console.WriteLine(ex.ToString());
         }
     }
     //Läser in poddar och deras avsnitt från en XML-fil och återställr dem till programmet.
@@ -227,7 +228,7 @@ public class PoddController
             XmlDocument doc = new XmlDocument();
             doc.Load(filnamn);
 
-            XmlNodeList podcastNodes = doc.SelectNodes("/Podcasts/Podcast");
+            XmlNodeList? podcastNodes = doc.SelectNodes("/Podcasts/Podcast");
             foreach (XmlNode podcastNode in podcastNodes)
             {
                 var avsnittRepository = new AvsnittRepository();
