@@ -75,9 +75,9 @@
             // 
             // btnNyttFlodeLaggTill
             // 
-            btnNyttFlodeLaggTill.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnNyttFlodeLaggTill.BackColor = Color.GhostWhite;
             btnNyttFlodeLaggTill.Cursor = Cursors.Hand;
-            btnNyttFlodeLaggTill.FlatStyle = FlatStyle.Flat;
+            btnNyttFlodeLaggTill.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 192);
             btnNyttFlodeLaggTill.Location = new Point(255, 283);
             btnNyttFlodeLaggTill.Margin = new Padding(5, 4, 5, 4);
             btnNyttFlodeLaggTill.Name = "btnNyttFlodeLaggTill";
@@ -143,9 +143,9 @@
             // 
             // btnRedigeraFloden
             // 
-            btnRedigeraFloden.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnRedigeraFloden.BackColor = Color.GhostWhite;
             btnRedigeraFloden.Cursor = Cursors.Hand;
-            btnRedigeraFloden.FlatStyle = FlatStyle.Flat;
+            btnRedigeraFloden.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 192);
             btnRedigeraFloden.Location = new Point(107, 632);
             btnRedigeraFloden.Margin = new Padding(5, 4, 5, 4);
             btnRedigeraFloden.Name = "btnRedigeraFloden";
@@ -157,9 +157,9 @@
             // 
             // btnRaderaFloden
             // 
-            btnRaderaFloden.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnRaderaFloden.BackColor = Color.GhostWhite;
             btnRaderaFloden.Cursor = Cursors.Hand;
-            btnRaderaFloden.FlatStyle = FlatStyle.Flat;
+            btnRaderaFloden.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 192);
             btnRaderaFloden.Location = new Point(255, 632);
             btnRaderaFloden.Margin = new Padding(5, 4, 5, 4);
             btnRaderaFloden.Name = "btnRaderaFloden";
@@ -183,9 +183,9 @@
             // 
             // btnRaderaKategori
             // 
-            btnRaderaKategori.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnRaderaKategori.BackColor = Color.GhostWhite;
             btnRaderaKategori.Cursor = Cursors.Hand;
-            btnRaderaKategori.FlatStyle = FlatStyle.Flat;
+            btnRaderaKategori.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 192);
             btnRaderaKategori.Location = new Point(1053, 403);
             btnRaderaKategori.Margin = new Padding(1, 3, 1, 3);
             btnRaderaKategori.Name = "btnRaderaKategori";
@@ -197,13 +197,13 @@
             // 
             // btnLaggTillKategori
             // 
-            btnLaggTillKategori.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnLaggTillKategori.BackColor = Color.GhostWhite;
             btnLaggTillKategori.Cursor = Cursors.Hand;
-            btnLaggTillKategori.FlatStyle = FlatStyle.Flat;
+            btnLaggTillKategori.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 192);
             btnLaggTillKategori.Location = new Point(1094, 537);
             btnLaggTillKategori.Margin = new Padding(5, 4, 5, 4);
             btnLaggTillKategori.Name = "btnLaggTillKategori";
-            btnLaggTillKategori.Size = new Size(120, 32);
+            btnLaggTillKategori.Size = new Size(79, 32);
             btnLaggTillKategori.TabIndex = 21;
             btnLaggTillKategori.Text = "Lägg till";
             btnLaggTillKategori.UseVisualStyleBackColor = false;
@@ -358,9 +358,9 @@
             // 
             // btnRedigeraKategori
             // 
-            btnRedigeraKategori.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnRedigeraKategori.BackColor = Color.GhostWhite;
             btnRedigeraKategori.Cursor = Cursors.Hand;
-            btnRedigeraKategori.FlatStyle = FlatStyle.Flat;
+            btnRedigeraKategori.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 192);
             btnRedigeraKategori.Location = new Point(833, 403);
             btnRedigeraKategori.Margin = new Padding(1, 3, 1, 3);
             btnRedigeraKategori.Name = "btnRedigeraKategori";

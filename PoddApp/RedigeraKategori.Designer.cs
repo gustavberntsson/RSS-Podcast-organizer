@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             cbRedigeraKategori = new ComboBox();
-            label1 = new Label();
             btnAvbrytKategoriAndring = new Button();
             txtRedigeraKategori = new TextBox();
             label2 = new Label();
@@ -41,30 +40,19 @@
             // 
             cbRedigeraKategori.Cursor = Cursors.Hand;
             cbRedigeraKategori.FormattingEnabled = true;
-            cbRedigeraKategori.Location = new Point(163, 112);
-            cbRedigeraKategori.Margin = new Padding(3, 2, 3, 2);
+            cbRedigeraKategori.Location = new Point(164, 88);
             cbRedigeraKategori.Name = "cbRedigeraKategori";
-            cbRedigeraKategori.Size = new Size(133, 23);
+            cbRedigeraKategori.Size = new Size(151, 28);
             cbRedigeraKategori.TabIndex = 0;
             cbRedigeraKategori.SelectedIndexChanged += cbRedigeraKategori_SelectedIndexChanged;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(171, 61);
-            label1.Name = "label1";
-            label1.Size = new Size(99, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Redigera kategori";
-            // 
             // btnAvbrytKategoriAndring
             // 
-            btnAvbrytKategoriAndring.BackColor = SystemColors.ButtonHighlight;
+            btnAvbrytKategoriAndring.BackColor = Color.GhostWhite;
             btnAvbrytKategoriAndring.Cursor = Cursors.Hand;
-            btnAvbrytKategoriAndring.Location = new Point(237, 220);
-            btnAvbrytKategoriAndring.Margin = new Padding(3, 2, 3, 2);
+            btnAvbrytKategoriAndring.Location = new Point(221, 216);
             btnAvbrytKategoriAndring.Name = "btnAvbrytKategoriAndring";
-            btnAvbrytKategoriAndring.Size = new Size(82, 22);
+            btnAvbrytKategoriAndring.Size = new Size(94, 29);
             btnAvbrytKategoriAndring.TabIndex = 2;
             btnAvbrytKategoriAndring.Text = "Avbryt";
             btnAvbrytKategoriAndring.UseVisualStyleBackColor = false;
@@ -73,38 +61,36 @@
             // txtRedigeraKategori
             // 
             txtRedigeraKategori.Cursor = Cursors.IBeam;
-            txtRedigeraKategori.Location = new Point(163, 158);
-            txtRedigeraKategori.Margin = new Padding(3, 2, 3, 2);
+            txtRedigeraKategori.Location = new Point(164, 150);
             txtRedigeraKategori.Name = "txtRedigeraKategori";
-            txtRedigeraKategori.Size = new Size(133, 23);
+            txtRedigeraKategori.Size = new Size(151, 27);
             txtRedigeraKategori.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(89, 158);
+            label2.Location = new Point(80, 150);
             label2.Name = "label2";
-            label2.Size = new Size(64, 15);
+            label2.Size = new Size(78, 20);
             label2.TabIndex = 4;
             label2.Text = "Nytt namn";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(44, 114);
+            label3.Location = new Point(28, 91);
             label3.Name = "label3";
-            label3.Size = new Size(101, 15);
+            label3.Size = new Size(130, 20);
             label3.TabIndex = 5;
             label3.Text = "Kategori att ändra";
             // 
             // btnSparaKategoriAndring
             // 
-            btnSparaKategoriAndring.BackColor = SystemColors.ButtonHighlight;
+            btnSparaKategoriAndring.BackColor = Color.GhostWhite;
             btnSparaKategoriAndring.Cursor = Cursors.Hand;
-            btnSparaKategoriAndring.Location = new Point(131, 220);
-            btnSparaKategoriAndring.Margin = new Padding(3, 2, 3, 2);
+            btnSparaKategoriAndring.Location = new Point(100, 216);
             btnSparaKategoriAndring.Name = "btnSparaKategoriAndring";
-            btnSparaKategoriAndring.Size = new Size(82, 22);
+            btnSparaKategoriAndring.Size = new Size(94, 29);
             btnSparaKategoriAndring.TabIndex = 6;
             btnSparaKategoriAndring.Text = "Spara";
             btnSparaKategoriAndring.UseVisualStyleBackColor = false;
@@ -112,17 +98,15 @@
             // 
             // RedigeraKategori
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(464, 338);
+            ClientSize = new Size(407, 383);
             Controls.Add(btnSparaKategoriAndring);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(txtRedigeraKategori);
             Controls.Add(btnAvbrytKategoriAndring);
-            Controls.Add(label1);
             Controls.Add(cbRedigeraKategori);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "RedigeraKategori";
             Text = "Redigera kategori";
             ResumeLayout(false);
@@ -132,7 +116,6 @@
         #endregion
 
         private ComboBox cbRedigeraKategori;
-        private Label label1;
         private Button btnAvbrytKategoriAndring;
         private TextBox txtRedigeraKategori;
         private Label label2;

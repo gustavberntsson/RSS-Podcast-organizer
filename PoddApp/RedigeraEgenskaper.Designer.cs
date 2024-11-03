@@ -129,30 +129,28 @@
             // 
             // btnAcceptChange
             // 
-            btnAcceptChange.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnAcceptChange.BackColor = Color.GhostWhite;
             btnAcceptChange.Cursor = Cursors.Hand;
-            btnAcceptChange.FlatStyle = FlatStyle.Flat;
             btnAcceptChange.Location = new Point(114, 239);
             btnAcceptChange.Margin = new Padding(3, 4, 3, 4);
             btnAcceptChange.Name = "btnAcceptChange";
             btnAcceptChange.Size = new Size(86, 30);
             btnAcceptChange.TabIndex = 9;
             btnAcceptChange.Text = "Godkänn";
-            btnAcceptChange.UseVisualStyleBackColor = true;
+            btnAcceptChange.UseVisualStyleBackColor = false;
             btnAcceptChange.Click += btnAcceptChange_Click;
             // 
             // btnAbortChange
             // 
-            btnAbortChange.BackColor = Color.FromArgb(204, 255, 210, 205);
+            btnAbortChange.BackColor = Color.GhostWhite;
             btnAbortChange.Cursor = Cursors.Hand;
-            btnAbortChange.FlatStyle = FlatStyle.Flat;
             btnAbortChange.Location = new Point(244, 239);
             btnAbortChange.Margin = new Padding(3, 4, 3, 4);
             btnAbortChange.Name = "btnAbortChange";
             btnAbortChange.Size = new Size(86, 30);
             btnAbortChange.TabIndex = 10;
             btnAbortChange.Text = "Avbryt";
-            btnAbortChange.UseVisualStyleBackColor = true;
+            btnAbortChange.UseVisualStyleBackColor = false;
             btnAbortChange.Click += btnAbortChange_Click;
             // 
             // RedigeraEgenskaper
