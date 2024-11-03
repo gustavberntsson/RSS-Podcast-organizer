@@ -15,10 +15,15 @@ namespace PoddApp
         public Form1()
         {
             InitializeComponent();
+            AsyncInit();
+        }
 
+        private async Task AsyncInit()
+        {
+            await Task.Delay(2000);
             try
             {
-                poddController.LaddaFranXml("poddar.xml");
+                await poddController.LaddaFranXml("poddar.xml");
             }
             catch (Exception ex)
             {
@@ -27,7 +32,7 @@ namespace PoddApp
 
             try
             {
-                poddController.LasaKategorierFranXml("kategorier.xml");
+                await Task.Run(() => poddController.LasaKategorierFranXml("kategorier.xml"));
             }
             catch (Exception ex)
             {
@@ -39,7 +44,7 @@ namespace PoddApp
                 _allapoddar = poddController.HamtaAllaPoddar();
                 FyllKategoriLista(GetKategorier());
                 UppdateraPoddLista();
-                LaddaKategorierFranXml("kategorier.xml");
+                await Task.Run(() => LaddaKategorierFranXml("kategorier.xml"));
                 rbNamn.Checked = true;
             }
             catch (Exception ex)
@@ -139,7 +144,7 @@ namespace PoddApp
             }
         }
 
-        private void btnNyttFlodeLaggTill_Click(object sender, EventArgs e)
+        private async void btnNyttFlodeLaggTill_Click(object sender, EventArgs e)
         {
             string rssLank = txtNyttFlodeURL.Text;
             string valdKategori = cbNyttFlodeKategori.Text;
@@ -165,7 +170,7 @@ namespace PoddApp
 
             try
             {
-                poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
+                await poddController.HamtaAvsnittFranRss(podcastNamn, rssLank, valdKategori);
                 txtVisaFloden.Items.Add(podcastNamn);
                 rbNamn.Checked = true;
             }

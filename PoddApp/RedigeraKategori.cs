@@ -17,12 +17,12 @@ namespace PoddApp
     public partial class RedigeraKategori : Form
     {
 
-        private List <String> _allakategorier;
+        private List<String> _allakategorier;
 
         private readonly PoddController _poddController;
 
 
-        public RedigeraKategori(List <String> allakategorier, PoddController poddController)
+        public RedigeraKategori(List<String> allakategorier, PoddController poddController)
         {
             InitializeComponent();
             _allakategorier = allakategorier;
@@ -53,7 +53,7 @@ namespace PoddApp
                 return;
             }
 
-            if (_allakategorier.Contains(nyKategori) && !valdKategori.Equals(nyKategori))
+            if (_allakategorier.Contains(nyKategori) && !valdKategori.Equals(nyKategori) || nyKategori.Equals(valdKategori))
             {
                 MessageBox.Show("Kategorin finns redan");
                 return;
@@ -95,6 +95,12 @@ namespace PoddApp
             {
                 txtRedigeraKategori.Text = cbRedigeraKategori.SelectedItem.ToString();
             }
+        }
+
+        private void btnAvbrytKategoriAndring_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }
